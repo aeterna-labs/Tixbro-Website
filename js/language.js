@@ -2,13 +2,8 @@
 const translations = {
     en: {
         // Navigation
-        'nav.home': 'Home',
-        'nav.about': 'About',
-        'nav.events': 'Events',
-        'nav.more': 'More',
-        'nav.cities': 'Cities',
-        'nav.reviews': 'Reviews',
-        'nav.support': 'Support',
+        'nav.shop': 'Shop',
+        'nav.signup': 'Sign Up',
         'nav.signin': 'Sign In',
 
         // Hero Carousel
@@ -110,13 +105,8 @@ const translations = {
     },
     hi: {
         // Navigation
-        'nav.home': 'होम',
-        'nav.about': 'हमारे बारे में',
-        'nav.events': 'इवेंट्स',
-        'nav.more': 'और',
-        'nav.cities': 'शहर',
-        'nav.reviews': 'समीक्षा',
-        'nav.support': 'सहायता',
+        'nav.shop': 'शॉप',
+        'nav.signup': 'साइन अप',
         'nav.signin': 'साइन इन',
 
         // Hero Carousel
