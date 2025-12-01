@@ -22,9 +22,20 @@ STRIPE_SECRET_KEY = [Dein Stripe Secret Key hier einfügen]
 - Der Key beginnt mit `sk_live_` für Production
 - Der Key beginnt mit `sk_test_` für Test-Modus
 
-### 2. Stripe Webhook einrichten (Optional, aber empfohlen)
+### 2. Stripe Webhook Secret konfigurieren
 
-Für Production-Zahlungsbestätigung:
+**WICHTIG:** Füge auch den Webhook Secret in Netlify hinzu:
+
+1. Gehe zu **Netlify Dashboard** → **Site settings** → **Environment variables**
+2. Füge hinzu:
+   ```
+   STRIPE_WEBHOOK_SECRET = [Dein Webhook Secret hier einfügen]
+   ```
+   ℹ️ Der Webhook Secret beginnt mit `whsec_...`
+
+### 3. Stripe Webhook-Endpoint einrichten (Wichtig für Production!)
+
+Für sichere Zahlungsbestätigung:
 
 1. Gehe zu [Stripe Dashboard](https://dashboard.stripe.com/webhooks)
 2. Klicke auf **Add endpoint**
@@ -32,23 +43,20 @@ Für Production-Zahlungsbestätigung:
    ```
    https://deine-netlify-domain.netlify.app/.netlify/functions/stripe-webhook
    ```
+   ⚠️ Ersetze `deine-netlify-domain` mit deiner echten Netlify-Domain!
 4. Events auswählen:
-   - `payment_intent.succeeded`
-   - `payment_intent.payment_failed`
-   - `charge.succeeded`
-5. Webhook Secret kopieren (beginnt mit `whsec_...`)
-6. In Netlify als Umgebungsvariable hinzufügen:
-   ```
-   STRIPE_WEBHOOK_SECRET = whsec_xxxxxxxxxxxxx
-   ```
+   - `payment_intent.succeeded` ✅
+   - `payment_intent.payment_failed` ⚠️
+   - `charge.succeeded` ✅
+5. Endpoint speichern
 
-### 3. Dependencies installieren
+### 4. Dependencies installieren
 
 Netlify installiert automatisch die Dependencies aus `/netlify/functions/package.json` beim Deployment.
 
 Die Stripe SDK (`stripe@^14.11.0`) wird automatisch installiert.
 
-### 4. Deployment durchführen
+### 5. Deployment durchführen
 
 ```bash
 git add .
