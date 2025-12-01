@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Payment Cancelled - Tixbro</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .cancel-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .cancel-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+        }
+        .cancel-icon i {
+            font-size: 50px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="container-fluid nav-bar p-0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0">
+            <a href="index.html" class="navbar-brand p-0">
+                <h1 class="display-5 text-secondary m-0">Tixbro</h1>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Cancel Message -->
+    <div class="container">
+        <div class="cancel-container">
+            <div class="cancel-icon">
+                <i class="fas fa-times"></i>
+            </div>
+
+            <h2 class="mb-3">Payment Cancelled</h2>
+            <p class="text-muted mb-4">Your payment was cancelled. No charges were made to your account.</p>
+
+            <div class="alert alert-warning">
+                <i class="fas fa-info-circle me-2"></i>
+                Your ticket reservation has not been completed. The tickets are still available for purchase.
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                <button class="btn btn-primary btn-lg" onclick="retryPayment()">
+                    <i class="fas fa-redo me-2"></i>Retry Payment
+                </button>
+                <a href="shop.html" class="btn btn-outline-secondary btn-lg">
+                    <i class="fas fa-shopping-bag me-2"></i>Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function retryPayment() {
+            // Check if there's checkout data in sessionStorage
+            const checkoutData = sessionStorage.getItem('checkoutEvent');
+
+            if (checkoutData) {
+                // Redirect back to checkout
+                window.location.href = 'checkout.html';
+            } else {
+                // No checkout data, redirect to shop
+                window.location.href = 'shop.html';
+            }
+        }
+    </script>
+</body>
+</html>
