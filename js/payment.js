@@ -49,7 +49,7 @@ export async function createCheckoutSession(eventId, quantity = 1) {
 }
 
 // Process payment (called from checkout page)
-export async function processStripePayment(customerData) {
+export async function processStripePayment(customerData, cardElement) {
     try {
         const stripe = getStripe();
         if (!stripe) {
@@ -62,20 +62,59 @@ export async function processStripePayment(customerData) {
             throw new Error('No checkout data found');
         }
 
-        // In production, you would:
-        // 1. Create a Stripe Checkout Session on your backend
-        // 2. Return the session ID
-        // 3. Redirect to Stripe Checkout using stripe.redirectToCheckout()
+        // Step 1: Create Payment Intent on backend
+        const response = await fetch('/.netlify/functions/create-payment-intent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: checkoutData.totalAmount,
+                currency: 'inr',
+                eventId: checkoutData.eventId,
+                eventTitle: checkoutData.eventTitle,
+                customerEmail: customerData.email
+            })
+        });
 
-        // For now, we'll simulate a successful payment
-        // and create the ticket directly
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to create payment intent');
+        }
 
+        const { clientSecret, paymentIntentId } = await response.json();
+
+        // Step 2: Confirm payment with card details
+        const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: `${customerData.firstName} ${customerData.lastName}`,
+                        email: customerData.email,
+                        phone: customerData.phone
+                    }
+                }
+            }
+        );
+
+        if (confirmError) {
+            throw new Error(confirmError.message);
+        }
+
+        // Step 3: Verify payment succeeded
+        if (paymentIntent.status !== 'succeeded') {
+            throw new Error('Payment was not successful. Please try again.');
+        }
+
+        // Step 4: Create ticket in Firestore
         const paymentData = {
-            paymentId: 'stripe_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-            paymentMethod: 'stripe_card'
+            paymentId: paymentIntent.id,
+            paymentMethod: 'stripe_card',
+            paymentStatus: 'completed'
         };
 
-        // Create ticket in Firestore
         const ticketResult = await purchaseTicket(
             checkoutData.eventId,
             customerData,
@@ -89,6 +128,7 @@ export async function processStripePayment(customerData) {
             // Store ticket info for success page
             sessionStorage.setItem('purchasedTicket', JSON.stringify({
                 ticketId: ticketResult.ticketId,
+                paymentId: paymentIntent.id,
                 ...checkoutData,
                 ...customerData
             }));

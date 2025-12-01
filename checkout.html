@@ -243,23 +243,8 @@
                     quantity: checkoutData.quantity
                 };
 
-                // Create payment method
-                const { error, paymentMethod } = await stripe.createPaymentMethod({
-                    type: 'card',
-                    card: cardElement,
-                    billing_details: {
-                        name: `${customerData.firstName} ${customerData.lastName}`,
-                        email: customerData.email,
-                        phone: customerData.phone
-                    }
-                });
-
-                if (error) {
-                    throw new Error(error.message);
-                }
-
-                // Process payment
-                const result = await processStripePayment(customerData);
+                // Process payment with card element
+                const result = await processStripePayment(customerData, cardElement);
 
                 if (result.success) {
                     // Redirect to success page

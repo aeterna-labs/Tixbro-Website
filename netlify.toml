@@ -1,0 +1,33 @@
+# Netlify Configuration for Tixbro
+
+[build]
+  # No build command needed for static site
+  publish = "."
+  functions = "netlify/functions"
+
+# Environment variables (set these in Netlify Dashboard)
+# STRIPE_SECRET_KEY - Your Stripe Secret Key (sk_live_...)
+# STRIPE_WEBHOOK_SECRET - Your Stripe Webhook Signing Secret (whsec_...)
+
+# Redirect rules
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Allow CORS for API endpoints
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type, Stripe-Signature"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
