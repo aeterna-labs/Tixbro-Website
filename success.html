@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Payment Successful - Tixbro</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .success-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+        }
+        .success-icon i {
+            font-size: 50px;
+            color: white;
+        }
+        .ticket-info {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="container-fluid nav-bar p-0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0">
+            <a href="index.html" class="navbar-brand p-0">
+                <h1 class="display-5 text-secondary m-0">Tixbro</h1>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Success Message -->
+    <div class="container">
+        <div class="success-container">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <h2 class="mb-3">Payment Successful!</h2>
+            <p class="text-muted mb-4">Your ticket has been confirmed and sent to your email.</p>
+
+            <!-- Ticket Information -->
+            <div class="ticket-info">
+                <h5 class="mb-3"><i class="fas fa-ticket-alt me-2"></i>Ticket Details</h5>
+
+                <div class="info-row">
+                    <strong>Ticket ID:</strong>
+                    <span id="ticketId"></span>
+                </div>
+
+                <div class="info-row">
+                    <strong>Event:</strong>
+                    <span id="eventTitle"></span>
+                </div>
+
+                <div class="info-row">
+                    <strong>Date & Time:</strong>
+                    <span id="eventDateTime"></span>
+                </div>
+
+                <div class="info-row">
+                    <strong>Location:</strong>
+                    <span id="eventLocation"></span>
+                </div>
+
+                <div class="info-row">
+                    <strong>Quantity:</strong>
+                    <span id="quantity"></span>
+                </div>
+
+                <div class="info-row">
+                    <strong>Total Amount:</strong>
+                    <span id="totalAmount" class="text-primary"></span>
+                </div>
+
+                <div class="info-row">
+                    <strong>Customer:</strong>
+                    <span id="customerName"></span>
+                </div>
+
+                <div class="info-row">
+                    <strong>Email:</strong>
+                    <span id="customerEmail"></span>
+                </div>
+            </div>
+
+            <!-- QR Code Placeholder -->
+            <div class="qr-code">
+                <div class="text-center">
+                    <i class="fas fa-qrcode" style="font-size: 80px; color: #ccc;"></i>
+                    <p class="text-muted mb-0"><small>QR Code</small></p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <i class="fas fa-envelope me-2"></i>
+                A confirmation email with your ticket has been sent to <strong id="emailConfirm"></strong>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                <button class="btn btn-primary btn-lg" onclick="downloadTicket()">
+                    <i class="fas fa-download me-2"></i>Download Ticket
+                </button>
+                <a href="shop.html" class="btn btn-outline-secondary btn-lg">
+                    <i class="fas fa-shopping-bag me-2"></i>Browse More Events
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Load ticket data on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const ticketData = sessionStorage.getItem('purchasedTicket');
+
+            if (!ticketData) {
+                // No ticket data, redirect to shop
+                window.location.href = 'shop.html';
+                return;
+            }
+
+            const ticket = JSON.parse(ticketData);
+            displayTicketInfo(ticket);
+
+            // Clear the ticket data from session storage after displaying
+            // sessionStorage.removeItem('purchasedTicket');
+        });
+
+        function displayTicketInfo(ticket) {
+            document.getElementById('ticketId').textContent = ticket.ticketId;
+            document.getElementById('eventTitle').textContent = ticket.eventTitle;
+            document.getElementById('eventDateTime').textContent =
+                `${formatDate(ticket.eventDate)} at ${ticket.eventTime}`;
+            document.getElementById('eventLocation').textContent =
+                `${ticket.eventLocation}, ${ticket.eventVenue}`;
+            document.getElementById('quantity').textContent = ticket.quantity;
+            document.getElementById('totalAmount').textContent = `₹${ticket.totalAmount}`;
+            document.getElementById('customerName').textContent =
+                `${ticket.firstName} ${ticket.lastName}`;
+            document.getElementById('customerEmail').textContent = ticket.email;
+            document.getElementById('emailConfirm').textContent = ticket.email;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        function downloadTicket() {
+            alert('Ticket download functionality will be implemented with PDF generation.');
+            // TODO: Implement PDF ticket generation
+        }
+    </script>
+</body>
+</html>

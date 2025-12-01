@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Checkout - Tixbro</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        .checkout-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .order-summary {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        #card-element {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            background: white;
+        }
+        #card-errors {
+            color: #dc3545;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="container-fluid nav-bar p-0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0">
+            <a href="index.html" class="navbar-brand p-0">
+                <h1 class="display-5 text-secondary m-0">Tixbro</h1>
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a href="shop.html" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Shop
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Checkout -->
+    <div class="container">
+        <div class="checkout-container">
+            <h2 class="mb-4"><i class="fas fa-shopping-cart me-2"></i>Checkout</h2>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h5 class="mb-3">Order Summary</h5>
+                <div class="d-flex justify-content-between mb-2">
+                    <span id="eventTitle"></span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span><i class="fas fa-calendar me-2"></i><span id="eventDateTime"></span></span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span><i class="fas fa-map-marker-alt me-2"></i><span id="eventLocation"></span></span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Price per ticket:</span>
+                    <span id="pricePerTicket"></span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Quantity:</span>
+                    <span id="quantity"></span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <h5>Total:</h5>
+                    <h5 class="text-primary" id="totalAmount"></h5>
+                </div>
+            </div>
+
+            <!-- Customer Information Form -->
+            <form id="checkout-form">
+                <h5 class="mb-3">Customer Information</h5>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName" class="form-label">First Name *</label>
+                        <input type="text" class="form-control" id="firstName" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">Last Name *</label>
+                        <input type="text" class="form-control" id="lastName" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email *</label>
+                    <input type="email" class="form-control" id="email" required>
+                    <small class="text-muted">Ticket will be sent to this email</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+
+                <h5 class="mb-3 mt-4">Payment Information</h5>
+
+                <!-- Stripe Card Element -->
+                <div class="mb-3">
+                    <label class="form-label">Card Details *</label>
+                    <div id="card-element"></div>
+                    <div id="card-errors"></div>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <small>Your payment is secured by Stripe. We never store your card details.</small>
+                </div>
+
+                <button type="submit" id="submit-button" class="btn btn-primary btn-lg w-100">
+                    <i class="fas fa-lock me-2"></i>Complete Payment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        import { initStripe } from './js/stripe-config.js';
+        import { processStripePayment } from './js/payment.js';
+
+        let checkoutData = null;
+        let stripe = null;
+        let cardElement = null;
+
+        // Load checkout data on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Get checkout data from sessionStorage
+            const data = sessionStorage.getItem('checkoutEvent');
+
+            if (!data) {
+                alert('No checkout data found');
+                window.location.href = 'shop.html';
+                return;
+            }
+
+            checkoutData = JSON.parse(data);
+            displayOrderSummary();
+            initializeStripe();
+        });
+
+        function displayOrderSummary() {
+            document.getElementById('eventTitle').textContent = checkoutData.eventTitle;
+            document.getElementById('eventDateTime').textContent =
+                `${formatDate(checkoutData.eventDate)} at ${checkoutData.eventTime}`;
+            document.getElementById('eventLocation').textContent =
+                `${checkoutData.eventLocation}, ${checkoutData.eventVenue}`;
+            document.getElementById('pricePerTicket').textContent = `₹${checkoutData.price}`;
+            document.getElementById('quantity').textContent = checkoutData.quantity;
+            document.getElementById('totalAmount').textContent = `₹${checkoutData.totalAmount}`;
+        }
+
+        function initializeStripe() {
+            stripe = initStripe();
+
+            if (!stripe) {
+                alert('Stripe not initialized. Please check your configuration.');
+                return;
+            }
+
+            // Create Stripe Elements
+            const elements = stripe.elements();
+            cardElement = elements.create('card', {
+                style: {
+                    base: {
+                        fontSize: '16px',
+                        color: '#32325d',
+                        fontFamily: '"Open Sans", sans-serif',
+                        '::placeholder': {
+                            color: '#aab7c4'
+                        }
+                    },
+                    invalid: {
+                        color: '#dc3545'
+                    }
+                }
+            });
+
+            cardElement.mount('#card-element');
+
+            // Handle real-time validation errors
+            cardElement.on('change', (event) => {
+                const displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.textContent = event.error.message;
+                } else {
+                    displayError.textContent = '';
+                }
+            });
+        }
+
+        // Handle form submission
+        document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitButton = document.getElementById('submit-button');
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
+
+            try {
+                // Get customer data
+                const customerData = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    quantity: checkoutData.quantity
+                };
+
+                // Create payment method
+                const { error, paymentMethod } = await stripe.createPaymentMethod({
+                    type: 'card',
+                    card: cardElement,
+                    billing_details: {
+                        name: `${customerData.firstName} ${customerData.lastName}`,
+                        email: customerData.email,
+                        phone: customerData.phone
+                    }
+                });
+
+                if (error) {
+                    throw new Error(error.message);
+                }
+
+                // Process payment
+                const result = await processStripePayment(customerData);
+
+                if (result.success) {
+                    // Redirect to success page
+                    window.location.href = 'success.html';
+                } else {
+                    throw new Error(result.error);
+                }
+
+            } catch (error) {
+                alert('Payment failed: ' + error.message);
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fas fa-lock me-2"></i>Complete Payment';
+            }
+        });
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+    </script>
+</body>
+</html>
