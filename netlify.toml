@@ -5,15 +5,15 @@
   publish = "."
   functions = "netlify/functions"
 
+# Plugin to install function dependencies automatically
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
 # Environment variables (set these in Netlify Dashboard)
 # STRIPE_SECRET_KEY - Your Stripe Secret Key (sk_live_...)
 # STRIPE_WEBHOOK_SECRET - Your Stripe Webhook Signing Secret (whsec_...)
-
-# Redirect rules
-[[redirects]]
-  from = "/.netlify/functions/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+# BREVO_API_KEY - Your Brevo API Key (xkeysib-xxx...)
+# BREVO_FROM_EMAIL - Your verified sender email (noreply@yourdomain.com)
 
 # Security headers
 [[headers]]

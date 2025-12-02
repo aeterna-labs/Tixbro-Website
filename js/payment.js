@@ -1,7 +1,9 @@
 // Payment Processing with Stripe for Tixbro
+// Manual workflow: Payment → Order saved in Firebase → Manual ticket creation
 import { getStripe } from './stripe-config.js';
-import { purchaseTicket } from './tickets.js';
 import { getEvent, incrementEventClicks } from './events.js';
+import { db } from './firebase-config.js';
+import { collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 
 // Create Stripe Checkout Session for ticket purchase
 export async function createCheckoutSession(eventId, quantity = 1) {
@@ -21,9 +23,6 @@ export async function createCheckoutSession(eventId, quantity = 1) {
 
         // Calculate total amount (in paise for INR)
         const amountInPaise = Math.round(event.price * quantity * 100);
-
-        // For demo purposes, we'll redirect to a checkout page
-        // In production, you would create a Stripe Checkout Session via your backend
 
         // Store checkout info in sessionStorage
         sessionStorage.setItem('checkoutEvent', JSON.stringify({
@@ -79,7 +78,14 @@ export async function processStripePayment(customerData, cardElement) {
                 currency: 'inr',
                 eventId: checkoutData.eventId,
                 eventTitle: checkoutData.eventTitle,
-                customerEmail: customerData.email
+                customerEmail: customerData.email,
+                customerName: `${customerData.firstName} ${customerData.lastName}`,
+                customerPhone: customerData.phone || '',
+                eventDate: checkoutData.eventDate,
+                eventTime: checkoutData.eventTime,
+                eventLocation: checkoutData.eventLocation,
+                eventVenue: checkoutData.eventVenue,
+                quantity: quantity
             })
         });
 
@@ -114,59 +120,52 @@ export async function processStripePayment(customerData, cardElement) {
             throw new Error('Payment was not successful. Please try again.');
         }
 
-        // Step 4: Create tickets in Firestore (handle multiple tickets if quantity > 1)
-        const paymentData = {
+        // Step 4: Save order to Firebase for manual processing
+        console.log('Payment successful! Saving order to Firebase...');
+
+        const orderId = await saveOrderToFirebase({
             paymentId: paymentIntent.id,
-            paymentMethod: 'stripe_card',
-            paymentStatus: 'completed'
-        };
+            customerFirstName: customerData.firstName,
+            customerLastName: customerData.lastName,
+            customerEmail: customerData.email,
+            customerPhone: customerData.phone || '',
+            eventId: checkoutData.eventId,
+            eventTitle: checkoutData.eventTitle,
+            eventDate: checkoutData.eventDate,
+            eventTime: checkoutData.eventTime,
+            eventLocation: checkoutData.eventLocation,
+            eventVenue: checkoutData.eventVenue,
+            quantity: quantity,
+            totalAmount: checkoutData.totalAmount,
+            currency: 'INR'
+        });
 
-        // Prepare customer data with full name
-        const ticketCustomerData = {
-            ...customerData,
-            name: `${customerData.firstName} ${customerData.lastName}`
-        };
-
-        // Create tickets (one by one if quantity > 1)
-        const ticketIds = [];
-        const quantity = checkoutData.quantity || 1;
-
-        // Create tickets sequentially (Firestore transaction handles availability check)
-        for (let i = 0; i < quantity; i++) {
-            const ticketResult = await purchaseTicket(
-                checkoutData.eventId,
-                ticketCustomerData,
-                paymentData
-            );
-
-            if (!ticketResult.success) {
-                // If ticket creation fails, we should ideally refund the payment
-                // For now, throw error and let Stripe handle it
-                throw new Error(`Failed to create ticket ${i + 1} of ${quantity}: ${ticketResult.error}`);
-            }
-
-            ticketIds.push(ticketResult.ticketId);
-        }
-
-        const mainTicketId = ticketIds[0];
+        console.log('Order saved to Firebase:', orderId);
 
         // Clear checkout data
         sessionStorage.removeItem('checkoutEvent');
 
-        // Store ticket info for success page
+        // Store order info for success page
         sessionStorage.setItem('purchasedTicket', JSON.stringify({
-            ticketId: mainTicketId,
-            ticketIds: ticketIds, // All ticket IDs if multiple
+            orderId: orderId,
             paymentId: paymentIntent.id,
-            ...checkoutData,
-            ...customerData
+            customerEmail: customerData.email,
+            customerName: `${customerData.firstName} ${customerData.lastName}`,
+            quantity: quantity,
+            totalAmount: checkoutData.totalAmount,
+            eventTitle: checkoutData.eventTitle,
+            eventDate: checkoutData.eventDate,
+            eventTime: checkoutData.eventTime,
+            eventLocation: checkoutData.eventLocation,
+            eventVenue: checkoutData.eventVenue,
+            manualProcessing: true // Indicates tickets will be sent manually
         }));
 
         return {
             success: true,
-            ticketId: mainTicketId,
-            ticketIds: ticketIds,
-            ticketCount: ticketIds.length
+            orderId: orderId,
+            paymentId: paymentIntent.id,
+            message: 'Payment successful! You will receive your tickets via email within 24 hours.'
         };
 
     } catch (error) {
@@ -175,9 +174,55 @@ export async function processStripePayment(customerData, cardElement) {
     }
 }
 
-// Verify payment (for webhook handling in future)
-export async function verifyPayment(sessionId) {
-    // This would be handled by backend webhook
-    // For now, just return success
-    return { success: true };
+// Save order to Firebase (for manual ticket creation)
+async function saveOrderToFirebase(orderData) {
+    try {
+        const ordersRef = collection(db, 'orders');
+
+        const order = {
+            // Order Info
+            orderId: 'ORD-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
+            status: 'paid', // paid, tickets_created, tickets_sent, completed
+
+            // Payment Info
+            paymentId: orderData.paymentId,
+            paymentStatus: 'completed',
+            paymentMethod: 'stripe_card',
+            currency: orderData.currency,
+            totalAmount: orderData.totalAmount,
+
+            // Customer Info
+            customerFirstName: orderData.customerFirstName,
+            customerLastName: orderData.customerLastName,
+            customerEmail: orderData.customerEmail,
+            customerPhone: orderData.customerPhone,
+
+            // Event Info
+            eventId: orderData.eventId,
+            eventTitle: orderData.eventTitle,
+            eventDate: orderData.eventDate,
+            eventTime: orderData.eventTime,
+            eventLocation: orderData.eventLocation,
+            eventVenue: orderData.eventVenue,
+
+            // Ticket Info
+            quantity: orderData.quantity,
+            ticketsCreated: false, // Admin creates tickets manually
+            ticketsSent: false, // Admin sends tickets manually
+            ticketIds: [], // Will be filled when tickets are created
+
+            // Timestamps
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+        };
+
+        const docRef = await addDoc(ordersRef, order);
+        console.log('Order saved with ID:', docRef.id);
+
+        return order.orderId;
+
+    } catch (error) {
+        console.error('Error saving order to Firebase:', error);
+        throw new Error('Failed to save order: ' + error.message);
+    }
 }

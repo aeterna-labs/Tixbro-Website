@@ -32,7 +32,20 @@ exports.handler = async (event, context) => {
 
   try {
     // Parse request body
-    const { amount, currency, eventId, eventTitle, customerEmail } = JSON.parse(event.body);
+    const {
+      amount,
+      currency,
+      eventId,
+      eventTitle,
+      customerEmail,
+      customerName,
+      customerPhone,
+      eventDate,
+      eventTime,
+      eventLocation,
+      eventVenue,
+      quantity
+    } = JSON.parse(event.body);
 
     // Validate required fields
     if (!amount || !currency) {
@@ -52,7 +65,7 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Create Payment Intent
+    // Create Payment Intent with comprehensive metadata for webhook
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to smallest currency unit (paise for INR)
       currency: currency || 'inr',
@@ -62,9 +75,17 @@ exports.handler = async (event, context) => {
       metadata: {
         eventId: eventId || '',
         eventTitle: eventTitle || '',
-        customerEmail: customerEmail || ''
+        customerEmail: customerEmail || '',
+        customerName: customerName || '',
+        customerPhone: customerPhone || '',
+        eventDate: eventDate || '',
+        eventTime: eventTime || '',
+        eventLocation: eventLocation || '',
+        eventVenue: eventVenue || '',
+        quantity: String(quantity || 1) // metadata values must be strings
       },
-      description: `Ticket purchase for ${eventTitle || 'event'}`
+      description: `Ticket purchase for ${eventTitle || 'event'}`,
+      receipt_email: customerEmail || null
     });
 
     // Return client secret to frontend
