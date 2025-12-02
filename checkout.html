@@ -243,23 +243,8 @@
                     quantity: checkoutData.quantity
                 };
 
-                // Create payment method
-                const { error, paymentMethod } = await stripe.createPaymentMethod({
-                    type: 'card',
-                    card: cardElement,
-                    billing_details: {
-                        name: `${customerData.firstName} ${customerData.lastName}`,
-                        email: customerData.email,
-                        phone: customerData.phone
-                    }
-                });
-
-                if (error) {
-                    throw new Error(error.message);
-                }
-
-                // Process payment
-                const result = await processStripePayment(customerData);
+                // Process payment with card element
+                const result = await processStripePayment(customerData, cardElement);
 
                 if (result.success) {
                     // Redirect to success page
@@ -269,7 +254,25 @@
                 }
 
             } catch (error) {
-                alert('Payment failed: ' + error.message);
+                console.error('Payment error:', error);
+
+                // Show error message in a better way
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger alert-dismissible fade show mt-3';
+                errorDiv.innerHTML = `
+                    <strong>Payment Failed!</strong> ${error.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+
+                // Insert error message before the form
+                const form = document.getElementById('checkout-form');
+                form.insertBefore(errorDiv, form.firstChild);
+
+                // Auto-dismiss after 10 seconds
+                setTimeout(() => {
+                    errorDiv.remove();
+                }, 10000);
+
                 submitButton.disabled = false;
                 submitButton.innerHTML = '<i class="fas fa-lock me-2"></i>Complete Payment';
             }

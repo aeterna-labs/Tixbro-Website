@@ -13,7 +13,7 @@ import {
     runTransaction
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// Purchase ticket
+// Purchase single ticket
 export async function purchaseTicket(eventId, customerData, paymentData) {
     try {
         const ticketId = 'TKT-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);

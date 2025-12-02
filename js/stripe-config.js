@@ -1,8 +1,8 @@
 // Stripe Configuration for Tixbro
-// Replace with your actual Stripe keys from https://dashboard.stripe.com/test/apikeys
+// Publishable key is safe to expose on client-side
 
-// IMPORTANT: Replace these with your actual keys!
-export const STRIPE_PUBLISHABLE_KEY = 'pk_test_YOUR_PUBLISHABLE_KEY_HERE';
+// LIVE Stripe Publishable Key
+export const STRIPE_PUBLISHABLE_KEY = 'pk_live_51SZfIaH0R2wVgZXuDYP3R0GpVrbDE1fTyepLvSMmLNU84PSfKR0E3Y1dgO3Y1vfMFYao3hI2plsGqcm04XICy4e000EOvEB2Ay';
 
 // Note: Secret key should NEVER be exposed on client-side
 // It should only be used in backend/server-side code

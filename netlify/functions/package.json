@@ -1,0 +1,19 @@
+{
+  "name": "tixbro-netlify-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for Tixbro payment processing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "stripe",
+    "payment",
+    "netlify"
+  ],
+  "author": "Tixbro",
+  "license": "ISC",
+  "dependencies": {
+    "stripe": "^14.11.0"
+  }
+}
