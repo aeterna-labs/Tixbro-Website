@@ -11,7 +11,7 @@ Nach dem ersten Deployment **MUSST** du folgende Umgebungsvariablen in Netlify s
 3. **Navigiere zu:** Site settings → Environment variables
 4. **Klicke:** Add a variable
 
-### Füge folgende 2 Variablen hinzu:
+### Füge folgende 4 Variablen hinzu:
 
 #### ✅ Variable 1: STRIPE_SECRET_KEY
 
@@ -36,6 +36,32 @@ Value: [Dein Webhook Secret - beginnt mit whsec_...]
 - Stripe Dashboard → Developers → Webhooks → Dein Webhook auswählen
 - Unter "Signing secret" findest du den Key
 - Oder verwende den Key, den du bereits hast
+
+
+#### ✅ Variable 3: SENDGRID_API_KEY
+
+```
+Key:   SENDGRID_API_KEY
+Value: [Dein SendGrid API Key - beginnt mit SG.xxx...]
+```
+
+**Wo finde ich den Key?**
+- SendGrid Dashboard → Settings → API Keys
+- Erstelle neuen Key falls noch nicht vorhanden
+- Siehe `EMAIL_SETUP.md` für detaillierte Anleitung
+
+
+#### ✅ Variable 4: SENDGRID_FROM_EMAIL
+
+```
+Key:   SENDGRID_FROM_EMAIL
+Value: [Deine verifizierte E-Mail - z.B. noreply@deine-domain.com]
+```
+
+**Wichtig:**
+- E-Mail muss in SendGrid verifiziert sein
+- Siehe `EMAIL_SETUP.md` für Sender Verification
+- Format: noreply@deine-domain.com (oder andere verifizierte E-Mail)
 
 ---
 
@@ -70,12 +96,15 @@ Value: [Dein Webhook Secret - beginnt mit whsec_...]
 
 - [ ] STRIPE_SECRET_KEY in Netlify gesetzt
 - [ ] STRIPE_WEBHOOK_SECRET in Netlify gesetzt
+- [ ] SENDGRID_API_KEY in Netlify gesetzt ✨ NEU
+- [ ] SENDGRID_FROM_EMAIL in Netlify gesetzt ✨ NEU
 - [ ] Webhook-Endpoint in Stripe Dashboard konfiguriert
+- [ ] SendGrid Sender verifiziert ✨ NEU
 - [ ] Test-Zahlung durchgeführt
 - [ ] Stripe Dashboard zeigt erfolgreiche Zahlung
 - [ ] Netlify Functions Logs zeigen keine Fehler
 - [ ] Firebase zeigt erstelltes Ticket
-- [ ] E-Mail-Versand funktioniert (falls implementiert)
+- [ ] Bestätigungs-E-Mail empfangen ✨ NEU
 
 ---
 

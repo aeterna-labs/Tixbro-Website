@@ -8,6 +8,8 @@
 # Environment variables (set these in Netlify Dashboard)
 # STRIPE_SECRET_KEY - Your Stripe Secret Key (sk_live_...)
 # STRIPE_WEBHOOK_SECRET - Your Stripe Webhook Signing Secret (whsec_...)
+# SENDGRID_API_KEY - Your SendGrid API Key (SG.xxx...)
+# SENDGRID_FROM_EMAIL - Your verified sender email (noreply@yourdomain.com)
 
 # Redirect rules
 [[redirects]]

@@ -150,6 +150,24 @@ export async function processStripePayment(customerData, cardElement) {
 
         const mainTicketId = ticketIds[0];
 
+        // Step 5: Send confirmation email (async, don't block on failure)
+        sendConfirmationEmail({
+            customerEmail: customerData.email,
+            customerName: `${customerData.firstName} ${customerData.lastName}`,
+            ticketIds: ticketIds,
+            eventTitle: checkoutData.eventTitle,
+            eventDate: checkoutData.eventDate,
+            eventTime: checkoutData.eventTime,
+            eventLocation: checkoutData.eventLocation,
+            eventVenue: checkoutData.eventVenue,
+            totalAmount: checkoutData.totalAmount,
+            quantity: quantity,
+            paymentId: paymentIntent.id
+        }).catch(error => {
+            // Log error but don't fail the transaction
+            console.error('Failed to send confirmation email:', error);
+        });
+
         // Clear checkout data
         sessionStorage.removeItem('checkoutEvent');
 
@@ -180,4 +198,30 @@ export async function verifyPayment(sessionId) {
     // This would be handled by backend webhook
     // For now, just return success
     return { success: true };
+}
+
+// Send confirmation email via Netlify Function
+async function sendConfirmationEmail(emailData) {
+    try {
+        const response = await fetch('/.netlify/functions/send-confirmation-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(emailData)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to send confirmation email');
+        }
+
+        const result = await response.json();
+        console.log('Confirmation email sent successfully:', result);
+        return result;
+
+    } catch (error) {
+        console.error('Error sending confirmation email:', error);
+        throw error;
+    }
 }
