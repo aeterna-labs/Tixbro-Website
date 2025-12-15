@@ -588,7 +588,7 @@ a {
 .event-badge {
     position: absolute;
     top: 1rem;
-    left: 1rem;
+    right: 1rem;
     padding: 0.5rem 1rem;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
