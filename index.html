@@ -1,924 +1,1584 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tixbro - Book Events, Concerts, Sports & Comedy Shows in India</title>
-    <meta name="description" content="Discover and book tickets to 1000+ events across India. Concerts, comedy shows, sports, nightlife & more. Best prices, instant booking.">
+    <meta name="description" content="Tixbro - India's Premier Ticket Booking Platform for Events, Movies, Concerts, Sports & More">
+    <title>Tixbro - Book Tickets for Events, Movies, Concerts & More</title>
 
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Primary Brand Colors */
-            --tixbro-primary: #FF6B35;
-            --tixbro-primary-dark: #E55A2B;
-            --tixbro-primary-light: #FF8C61;
-
-            /* Secondary Colors */
-            --tixbro-gold: #FFB80C;
-            --tixbro-maroon: #8B1538;
-            --tixbro-teal: #00A896;
-
-            /* Neutrals */
-            --pure-white: #FFFFFF;
-            --off-white: #FFFEF9;
-            --light-gray: #F5F5F0;
-            --mid-gray: #E0DED5;
-            --text-gray: #4A4945;
-            --text-black: #1A1916;
-
-            /* Fonts */
-            --font-display: 'Poppins', sans-serif;
-            --font-body: 'Inter', sans-serif;
-
-            /* Spacing */
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-            --space-2xl: 48px;
-            --space-3xl: 64px;
-            --space-4xl: 96px;
-        }
-
-        body {
-            font-family: var(--font-body);
-            color: var(--text-black);
-            background: var(--off-white);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            height: 76px;
-            background: rgba(255, 255, 255, 0);
-            backdrop-filter: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        .navbar-container {
-            max-width: 1440px;
-            height: 100%;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .navbar-logo {
-            font-family: var(--font-display);
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--tixbro-primary), var(--tixbro-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-        }
-
-        .navbar-menu {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            list-style: none;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 12px 18px;
-            font-family: var(--font-display);
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-black);
-            text-decoration: none;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 8px;
-            left: 18px;
-            right: 18px;
-            height: 3px;
-            background: var(--tixbro-primary);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--tixbro-primary);
-        }
-
-        .nav-link.active::after {
-            transform: scaleX(1);
-        }
-
-        .navbar-actions {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .location-selector {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 16px;
-            background: rgba(245, 245, 240, 0.8);
-            border: none;
-            border-radius: 24px;
-            font-family: var(--font-body);
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-black);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .location-selector:hover {
-            background: rgba(245, 245, 240, 1);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 90vh;
-            min-height: 600px;
-            max-height: 900px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .hero-background {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            transform: scale(1.1);
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                180deg,
-                rgba(26, 25, 22, 0) 0%,
-                rgba(26, 25, 22, 0.4) 50%,
-                rgba(26, 25, 22, 0.85) 100%
-            );
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            padding: 0 32px;
-            text-align: center;
-        }
-
-        .hero-headline {
-            font-family: var(--font-display);
-            font-size: clamp(36px, 7vw, 78px);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            color: white;
-            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
-            margin-bottom: 24px;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
-        }
-
-        .hero-headline .highlight {
-            background: linear-gradient(135deg, var(--tixbro-primary) 0%, var(--tixbro-gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subheadline {
-            font-family: var(--font-body);
-            font-size: clamp(16px, 2vw, 22px);
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 40px;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s backwards;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 40px;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s backwards;
-            flex-wrap: wrap;
-        }
-
-        .hero-cta-primary {
-            padding: 18px 40px;
-            background: var(--tixbro-primary);
-            border: none;
-            border-radius: 14px;
-            font-family: var(--font-display);
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.35);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-        }
-
-        .hero-cta-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.45);
-        }
-
-        .hero-categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.8s backwards;
-        }
-
-        .category-chip {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            font-family: var(--font-body);
-            font-size: 14px;
-            font-weight: 600;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .category-chip:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Services Section */
-        .services-section {
-            padding: var(--space-4xl) 0;
-            background: white;
-        }
-
-        .section-container {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(28px, 4vw, 42px);
-            font-weight: 700;
-            color: var(--text-black);
-            letter-spacing: -0.02em;
-            margin-bottom: 12px;
-        }
-
-        .section-subtitle {
-            font-family: var(--font-body);
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--text-gray);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .service-image-wrapper {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .service-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .service-card:hover .service-image {
-            transform: scale(1.08);
-        }
-
-        .service-icon {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            width: 56px;
-            height: 56px;
-            background: white;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            font-size: 28px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .service-content {
-            padding: 24px;
-        }
-
-        .service-title {
-            font-family: var(--font-display);
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text-black);
-            margin-bottom: 8px;
-        }
-
-        .service-description {
-            font-family: var(--font-body);
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--text-gray);
-            margin-bottom: 16px;
-        }
-
-        .service-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-display);
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--tixbro-primary);
-            transition: gap 0.3s ease;
-        }
-
-        .service-card:hover .service-cta {
-            gap: 12px;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--text-black);
-            color: white;
-            padding: 80px 0 0;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 60px;
-        }
-
-        .footer-logo {
-            font-family: var(--font-display);
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--tixbro-primary), var(--tixbro-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 16px;
-            display: inline-block;
-        }
-
-        .footer-tagline {
-            font-size: 15px;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 24px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-link {
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--tixbro-primary);
-            transform: translateY(-4px);
-        }
-
-        .footer-column-title {
-            font-family: var(--font-display);
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            font-size: 15px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--tixbro-primary);
-        }
-
-        .footer-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 32px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .copyright {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .footer-bottom-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-bottom-links a {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-bottom-links a:hover {
-            color: white;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 968px) {
-            .navbar {
-                height: 60px;
-            }
-
-            .navbar-container {
-                padding: 0 16px;
-            }
-
-            .navbar-menu {
-                display: none;
-            }
-
-            .hero {
-                height: 85vh;
-                min-height: 500px;
-            }
-
-            .hero-content {
-                padding: 0 16px;
-            }
-
-            .hero-cta-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .hero-cta-primary {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .section-container {
-                padding: 0 16px;
-            }
-
-            .services-section {
-                padding: var(--space-3xl) 0;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer {
-                padding: 60px 0 0;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-
-            .footer-bottom-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .location-selector {
-                font-size: 12px;
-                padding: 8px 12px;
-            }
-        }
-    </style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Navigation -->
     <nav class="navbar" id="navbar">
-        <div class="navbar-container">
-            <a href="index.html" class="navbar-logo">Tixbro</a>
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo">
+                    <span class="logo-text">Tixbro</span>
+                </a>
+            </div>
 
-            <ul class="navbar-menu">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="shop.html" class="nav-link">Events</a></li>
-                <li><a href="shop.html" class="nav-link">Concerts</a></li>
-                <li><a href="shop.html" class="nav-link">Sports</a></li>
-                <li><a href="shop.html" class="nav-link">Comedy</a></li>
-            </ul>
+            <div class="nav-center">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#trending" class="nav-link">Events</a></li>
+                    <li><a href="#concerts" class="nav-link">Concerts</a></li>
+                    <li><a href="#sports" class="nav-link">Sports</a></li>
+                    <li><a href="#cities" class="nav-link">Cities</a></li>
+                    <li><a href="pages/about.html" class="nav-link">About</a></li>
+                    <li><a href="pages/blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
 
-            <div class="navbar-actions">
-                <button class="location-selector">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Mumbai</span>
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="login.html" class="btn btn-outline">Sign In</a>
+                <a href="login.html" class="btn btn-primary">Sign Up</a>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background">
-            <img
-                src="img/carousel-1.jpg"
-                alt="Event Booking India"
-                class="hero-image"
-            />
-            <div class="hero-overlay"></div>
-        </div>
-
+    <section class="hero" id="hero">
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-headline">
+            <h1 class="hero-title">
                 Your City.<br>
                 Your Vibe.<br>
-                <span class="highlight">Your Night Out.</span>
+                <span class="hero-highlight">Your Night Out.</span>
             </h1>
+            <p class="hero-subtitle">Discover the best events, concerts, sports & experiences across India</p>
 
-            <p class="hero-subheadline">
-                Discover 1000+ events across Mumbai, Delhi, Bangalore & more
-            </p>
-
-            <div class="hero-cta-group">
-                <a href="shop.html" class="hero-cta-primary">
-                    <span>Explore Events</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+            <!-- Search Bar -->
+            <div class="hero-search">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search for events, artists, venues..." class="search-input">
+                </div>
+                <button class="btn btn-primary search-btn">Search</button>
             </div>
 
+            <!-- Category Chips -->
             <div class="hero-categories">
-                <a href="shop.html" class="category-chip">🎵 Concerts</a>
-                <a href="shop.html" class="category-chip">😂 Comedy</a>
-                <a href="shop.html" class="category-chip">⚽ Sports</a>
-                <a href="shop.html" class="category-chip">🏟️ Turf</a>
-                <a href="shop.html" class="category-chip">🎓 College Fests</a>
+                <a href="#" class="category-chip">🎬 Movies</a>
+                <a href="#" class="category-chip">🎵 Concerts</a>
+                <a href="#" class="category-chip">⚽ Sports</a>
+                <a href="#" class="category-chip">🎭 Theatre</a>
+                <a href="#" class="category-chip">🏟️ Turf Booking</a>
+                <a href="#" class="category-chip">🎓 College Fests</a>
+                <a href="#" class="category-chip">🚌 Bus Tickets</a>
+                <a href="#" class="category-chip">🎉 Events</a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Trending Events Section -->
+    <section class="section trending-section" id="trending">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Trending Events</h2>
+                    <p class="section-subtitle">The hottest events happening right now</p>
+                </div>
+                <a href="shop.html" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="events-carousel" id="trendingCarousel">
+                <!-- Event Card 1 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-1.jpg" alt="Sunburn Festival" class="event-image">
+                        <span class="event-badge trending">🔥 Trending</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">Sunburn Festival 2024</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Mumbai</span>
+                            <span><i class="fas fa-calendar"></i> Dec 28-30</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹2,499 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 2 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-2.jpg" alt="IPL 2024" class="event-image">
+                        <span class="event-badge new">✨ New</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category sports">Sports</span>
+                        <h3 class="event-title">IPL 2024 Final</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Bangalore</span>
+                            <span><i class="fas fa-calendar"></i> Jan 15</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹1,999 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 3 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-3.jpg" alt="Comedy Night" class="event-image">
+                        <span class="event-badge">🎭</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category theatre">Theatre</span>
+                        <h3 class="event-title">Standup Comedy Night</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Delhi</span>
+                            <span><i class="fas fa-calendar"></i> Dec 20</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹499 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 4 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-4.jpg" alt="IIT Mood Indigo" class="event-image">
+                        <span class="event-badge trending">🔥 Trending</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category college-fest">College Fest</span>
+                        <h3 class="event-title">IIT Mood Indigo 2024</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Mumbai</span>
+                            <span><i class="fas fa-calendar"></i> Dec 25-27</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹299 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 5 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-5.jpg" alt="Turf Booking" class="event-image">
+                        <span class="event-badge">⚽</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category turf">Turf</span>
+                        <h3 class="event-title">PlayArena Sports Turf</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Pune</span>
+                            <span><i class="fas fa-clock"></i> Available 24/7</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹800 <span>/hour</span></div>
+                            <button class="btn btn-small">Book Slot</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 6 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-6.jpg" alt="Rock Concert" class="event-image">
+                        <span class="event-badge new">✨ New</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">NH7 Weekender</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Pune</span>
+                            <span><i class="fas fa-calendar"></i> Jan 5-7</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹1,799 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 7 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-7.jpg" alt="Kabaddi Match" class="event-image">
+                        <span class="event-badge">🏆</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category sports">Sports</span>
+                        <h3 class="event-title">Pro Kabaddi League</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                            <span><i class="fas fa-calendar"></i> Dec 22</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹399 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 8 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-8.jpg" alt="Musical Theatre" class="event-image">
+                        <span class="event-badge">🎵</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category theatre">Theatre</span>
+                        <h3 class="event-title">The Lion King Musical</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Chennai</span>
+                            <span><i class="fas fa-calendar"></i> Dec 18-31</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹899 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 9 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-9.jpg" alt="Music Festival" class="event-image">
+                        <span class="event-badge trending">🔥 Trending</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">Magnetic Fields Festival</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Alsisar</span>
+                            <span><i class="fas fa-calendar"></i> Jan 12-14</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹3,999 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 10 -->
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/event-10.jpg" alt="College Fest" class="event-image">
+                        <span class="event-badge new">✨ New</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category college-fest">College Fest</span>
+                        <h3 class="event-title">BITS Pilani Oasis</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Pilani</span>
+                            <span><i class="fas fa-calendar"></i> Jan 20-22</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹199 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services-section">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">Book Tickets for Every Occasion</h2>
-                <p class="section-subtitle">Whether you're commuting daily, catching the latest blockbuster, or experiencing live entertainment - we've got you covered</p>
+    <!-- Book Tickets Section (Service Categories) -->
+    <section class="section services-section" id="services">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">Book Tickets For</h2>
+                <p class="section-subtitle">Choose from our wide range of entertainment options</p>
             </div>
 
             <div class="services-grid">
-                <!-- Movies -->
-                <a href="shop.html" class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="img/service-2.jpg" alt="Movies" class="service-image">
-                        <div class="service-icon">🎬</div>
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Movies</h3>
-                        <p class="service-description">Catch the latest Bollywood, Hollywood, and regional films. Choose your seats, skip the queues!</p>
-                        <div class="service-cta">
-                            <span>Book Tickets</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
+                <div class="service-card">
+                    <div class="service-icon">🎬</div>
+                    <h3 class="service-title">Movies</h3>
+                    <p class="service-description">Latest blockbusters in your city</p>
+                    <a href="shop.html?category=movies" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
 
-                <!-- Concerts -->
-                <a href="shop.html" class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="img/service-3.jpg" alt="Concerts" class="service-image">
-                        <div class="service-icon">🎵</div>
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Concerts</h3>
-                        <p class="service-description">Experience live music like never before! From Arijit Singh to EDM festivals - all here.</p>
-                        <div class="service-cta">
-                            <span>Get Tickets</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
+                <div class="service-card">
+                    <div class="service-icon">🎵</div>
+                    <h3 class="service-title">Concerts</h3>
+                    <p class="service-description">Live music from top artists</p>
+                    <a href="shop.html?category=concerts" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
 
-                <!-- Sports -->
-                <a href="shop.html" class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="img/service-5.jpg" alt="Sports" class="service-image">
-                        <div class="service-icon">⚽</div>
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Sports Events</h3>
-                        <p class="service-description">Watch your favorite teams live! IPL Cricket, ISL Football, Kabaddi and more sporting events.</p>
-                        <div class="service-cta">
-                            <span>Book Tickets</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
+                <div class="service-card">
+                    <div class="service-icon">⚽</div>
+                    <h3 class="service-title">Sports</h3>
+                    <p class="service-description">Cricket, football & more</p>
+                    <a href="shop.html?category=sports" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
 
-                <!-- Theatre -->
-                <a href="shop.html" class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="img/service-4.jpg" alt="Theatre" class="service-image">
-                        <div class="service-icon">🎭</div>
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Theatre & Plays</h3>
-                        <p class="service-description">Enjoy captivating performances! Theatre shows, musicals, stand-up comedy, and dramatic plays.</p>
-                        <div class="service-cta">
-                            <span>Book Tickets</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
+                <div class="service-card">
+                    <div class="service-icon">🎭</div>
+                    <h3 class="service-title">Theatre</h3>
+                    <p class="service-description">Plays, standup & more</p>
+                    <a href="shop.html?category=theatre" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
 
-                <!-- Turf Booking -->
-                <a href="shop.html" class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="img/service-6.jpg" alt="Turf Booking" class="service-image">
-                        <div class="service-icon">🏟️</div>
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Turf Booking</h3>
-                        <p class="service-description">Book premium sports turfs for cricket, football, badminton. Play with your team at the best venues!</p>
-                        <div class="service-cta">
-                            <span>Book Turf</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
+                <div class="service-card featured">
+                    <div class="service-icon">🏟️</div>
+                    <h3 class="service-title">Turf Booking</h3>
+                    <p class="service-description">Book sports turfs instantly</p>
+                    <a href="shop.html?category=turf" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
 
-                <!-- College Fests -->
-                <a href="shop.html" class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="img/service-1.jpg" alt="College Fests" class="service-image">
-                        <div class="service-icon">🎓</div>
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">College Fests</h3>
-                        <p class="service-description">Experience the energy of college festivals! Cultural fests, tech events, sports meets and more!</p>
-                        <div class="service-cta">
-                            <span>Book Tickets</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
+                <div class="service-card featured">
+                    <div class="service-icon">🎓</div>
+                    <h3 class="service-title">College Fests</h3>
+                    <p class="service-description">Campus events & festivals</p>
+                    <a href="shop.html?category=college-fest" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
 
-                <!-- Bus Tickets -->
-                <a href="shop.html" class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="img/service-1.jpg" alt="Bus Tickets" class="service-image">
-                        <div class="service-icon">🚌</div>
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Bus Tickets</h3>
-                        <p class="service-description">Travel across India with ease. Book AC, Non-AC, Sleeper buses from thousands of operators!</p>
-                        <div class="service-cta">
-                            <span>Book Bus</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
+                <div class="service-card">
+                    <div class="service-icon">🚌</div>
+                    <h3 class="service-title">Bus Tickets</h3>
+                    <p class="service-description">Intercity travel made easy</p>
+                    <a href="shop.html?category=bus" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
 
-                <!-- Events & More -->
-                <a href="shop.html" class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="img/service-3.jpg" alt="Events" class="service-image">
-                        <div class="service-icon">🎪</div>
+                <div class="service-card">
+                    <div class="service-icon">🎉</div>
+                    <h3 class="service-title">Events</h3>
+                    <p class="service-description">Workshops, meetups & more</p>
+                    <a href="shop.html?category=events" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Concerts Section -->
+    <section class="section concerts-section" id="concerts">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Upcoming Concerts</h2>
+                    <p class="section-subtitle">Live music experiences you can't miss</p>
+                </div>
+                <a href="shop.html?category=concerts" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="events-carousel">
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/concert-1.jpg" alt="Arijit Singh" class="event-image">
                     </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Events & More</h3>
-                        <p class="service-description">Discover workshops, exhibitions, conferences, food festivals and special events near you!</p>
-                        <div class="service-cta">
-                            <span>Explore Events</span>
-                            <i class="fas fa-arrow-right"></i>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">Arijit Singh Live</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Mumbai</span>
+                            <span><i class="fas fa-calendar"></i> Dec 31</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹1,499 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
                         </div>
                     </div>
-                </a>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/concert-2.jpg" alt="Diljit Dosanjh" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">Diljit Dosanjh Tour</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Delhi</span>
+                            <span><i class="fas fa-calendar"></i> Jan 8</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹1,999 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/concert-3.jpg" alt="Coldplay" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">Coldplay India Tour</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Mumbai</span>
+                            <span><i class="fas fa-calendar"></i> Jan 19-21</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹4,999 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/concert-4.jpg" alt="A.R. Rahman" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">A.R. Rahman Concert</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Chennai</span>
+                            <span><i class="fas fa-calendar"></i> Jan 26</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹1,799 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/concert-5.jpg" alt="Badshah" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">Badshah Live</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Bangalore</span>
+                            <span><i class="fas fa-calendar"></i> Feb 2</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹999 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/concert-6.jpg" alt="Rock Festival" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">India Rock Festival</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Pune</span>
+                            <span><i class="fas fa-calendar"></i> Feb 10-11</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹1,299 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/concert-7.jpg" alt="Electronic Festival" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">Echoes of Earth</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Bangalore</span>
+                            <span><i class="fas fa-calendar"></i> Feb 17-18</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹1,599 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/concert-8.jpg" alt="Classical Concert" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category concerts">Concerts</span>
+                        <h3 class="event-title">Zakir Hussain Live</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Delhi</span>
+                            <span><i class="fas fa-calendar"></i> Feb 24</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹899 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comedy Shows Section -->
+    <section class="section comedy-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Comedy Shows</h2>
+                    <p class="section-subtitle">Laugh out loud with India's best comedians</p>
+                </div>
+                <a href="shop.html?category=theatre" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="events-carousel">
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/comedy-1.jpg" alt="Zakir Khan" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category theatre">Comedy</span>
+                        <h3 class="event-title">Zakir Khan Live</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Mumbai</span>
+                            <span><i class="fas fa-calendar"></i> Dec 23</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹799 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/comedy-2.jpg" alt="Vir Das" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category theatre">Comedy</span>
+                        <h3 class="event-title">Vir Das Tour</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Delhi</span>
+                            <span><i class="fas fa-calendar"></i> Dec 27</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹999 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/comedy-3.jpg" alt="Biswa Kalyan" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category theatre">Comedy</span>
+                        <h3 class="event-title">Biswa Kalyan Rath</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Bangalore</span>
+                            <span><i class="fas fa-calendar"></i> Jan 3</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹599 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/comedy-4.jpg" alt="Kanan Gill" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category theatre">Comedy</span>
+                        <h3 class="event-title">Kanan Gill Show</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Pune</span>
+                            <span><i class="fas fa-calendar"></i> Jan 9</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹699 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/comedy-5.jpg" alt="Kenny Sebastian" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category theatre">Comedy</span>
+                        <h3 class="event-title">Kenny Sebastian Live</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                            <span><i class="fas fa-calendar"></i> Jan 14</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹649 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/comedy-6.jpg" alt="Abhishek Upmanyu" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category theatre">Comedy</span>
+                        <h3 class="event-title">Abhishek Upmanyu</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Chennai</span>
+                            <span><i class="fas fa-calendar"></i> Jan 18</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹599 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sports Events Section -->
+    <section class="section sports-section" id="sports">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Sports Events</h2>
+                    <p class="section-subtitle">Catch your favorite teams in action</p>
+                </div>
+                <a href="shop.html?category=sports" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="events-carousel">
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/sports-1.jpg" alt="Cricket Match" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category sports">Cricket</span>
+                        <h3 class="event-title">India vs Australia</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Mumbai</span>
+                            <span><i class="fas fa-calendar"></i> Jan 5</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹1,499 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/sports-2.jpg" alt="Football" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category sports">Football</span>
+                        <h3 class="event-title">ISL Finals</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Goa</span>
+                            <span><i class="fas fa-calendar"></i> Jan 12</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹699 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/sports-3.jpg" alt="Badminton" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category sports">Badminton</span>
+                        <h3 class="event-title">India Open</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Delhi</span>
+                            <span><i class="fas fa-calendar"></i> Jan 16-21</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹399 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/sports-4.jpg" alt="Formula 1" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category sports">Formula 1</span>
+                        <h3 class="event-title">F1 Bharat GP</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Noida</span>
+                            <span><i class="fas fa-calendar"></i> Feb 23-25</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹9,999 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/sports-5.jpg" alt="Marathon" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category sports">Marathon</span>
+                        <h3 class="event-title">Mumbai Marathon</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Mumbai</span>
+                            <span><i class="fas fa-calendar"></i> Jan 14</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹1,200 <span>entry</span></div>
+                            <button class="btn btn-small">Register</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image-wrapper">
+                        <img src="img/sports-6.jpg" alt="Hockey" class="event-image">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category sports">Hockey</span>
+                        <h3 class="event-title">Hockey India League</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Bhubaneswar</span>
+                            <span><i class="fas fa-calendar"></i> Jan 28</span>
+                        </div>
+                        <div class="event-footer">
+                            <div class="event-price">₹299 <span>onwards</span></div>
+                            <button class="btn btn-small">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Tixbro Section -->
+    <section class="section features-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">Why Choose Tixbro?</h2>
+                <p class="section-subtitle">India's most trusted ticket booking platform</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">Instant Booking</h3>
+                    <p class="feature-description">Book tickets in seconds with our lightning-fast platform</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">100% Secure</h3>
+                    <p class="feature-description">Bank-grade encryption for all transactions</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3 class="feature-title">Best Prices</h3>
+                    <p class="feature-description">Lowest prices guaranteed with exclusive deals</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">24/7 Support</h3>
+                    <p class="feature-description">Round-the-clock customer support for assistance</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Mobile Tickets</h3>
+                    <p class="feature-description">Digital tickets on your phone, no printing needed</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3 class="feature-title">Easy Refunds</h3>
+                    <p class="feature-description">Hassle-free cancellation and instant refunds</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3 class="feature-title">Event Alerts</h3>
+                    <p class="feature-description">Never miss your favorite artists and events</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="feature-title">Verified Reviews</h3>
+                    <p class="feature-description">Authentic reviews from real attendees</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats & Numbers Section -->
+    <section class="section stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10M+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Events Listed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Cities Covered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Secure Payments</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Cities Section -->
+    <section class="section cities-section" id="cities">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">Explore Events By City</h2>
+                <p class="section-subtitle">Discover events happening in your city</p>
+            </div>
+
+            <div class="cities-grid">
+                <div class="city-card">
+                    <img src="img/city-mumbai.jpg" alt="Mumbai" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Mumbai</h3>
+                        <p class="city-events">1200+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-delhi.jpg" alt="Delhi" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Delhi</h3>
+                        <p class="city-events">980+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-bangalore.jpg" alt="Bangalore" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Bangalore</h3>
+                        <p class="city-events">850+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-pune.jpg" alt="Pune" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Pune</h3>
+                        <p class="city-events">620+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-hyderabad.jpg" alt="Hyderabad" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Hyderabad</h3>
+                        <p class="city-events">540+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-chennai.jpg" alt="Chennai" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Chennai</h3>
+                        <p class="city-events">480+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-kolkata.jpg" alt="Kolkata" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Kolkata</h3>
+                        <p class="city-events">420+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-ahmedabad.jpg" alt="Ahmedabad" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Ahmedabad</h3>
+                        <p class="city-events">380+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-jaipur.jpg" alt="Jaipur" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Jaipur</h3>
+                        <p class="city-events">320+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-goa.jpg" alt="Goa" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Goa</h3>
+                        <p class="city-events">280+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-kochi.jpg" alt="Kochi" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Kochi</h3>
+                        <p class="city-events">240+ Events</p>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <img src="img/city-chandigarh.jpg" alt="Chandigarh" class="city-image">
+                    <div class="city-overlay">
+                        <h3 class="city-name">Chandigarh</h3>
+                        <p class="city-events">200+ Events</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Artists Section -->
+    <section class="section artists-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">Popular Artists</h2>
+                <p class="section-subtitle">Follow your favorite artists and never miss their events</p>
+            </div>
+
+            <div class="artists-grid">
+                <div class="artist-bubble">
+                    <img src="img/artist-1.jpg" alt="Arijit Singh" class="artist-image">
+                    <p class="artist-name">Arijit Singh</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-2.jpg" alt="Diljit Dosanjh" class="artist-image">
+                    <p class="artist-name">Diljit Dosanjh</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-3.jpg" alt="Zakir Khan" class="artist-image">
+                    <p class="artist-name">Zakir Khan</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-4.jpg" alt="A.R. Rahman" class="artist-image">
+                    <p class="artist-name">A.R. Rahman</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-5.jpg" alt="Vir Das" class="artist-image">
+                    <p class="artist-name">Vir Das</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-6.jpg" alt="Badshah" class="artist-image">
+                    <p class="artist-name">Badshah</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-7.jpg" alt="Shreya Ghoshal" class="artist-image">
+                    <p class="artist-name">Shreya Ghoshal</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-8.jpg" alt="Biswa Kalyan" class="artist-image">
+                    <p class="artist-name">Biswa Kalyan</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-9.jpg" alt="Nucleya" class="artist-image">
+                    <p class="artist-name">Nucleya</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-10.jpg" alt="Kanan Gill" class="artist-image">
+                    <p class="artist-name">Kanan Gill</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-11.jpg" alt="Ritviz" class="artist-image">
+                    <p class="artist-name">Ritviz</p>
+                </div>
+                <div class="artist-bubble">
+                    <img src="img/artist-12.jpg" alt="Kenny Sebastian" class="artist-image">
+                    <p class="artist-name">Kenny Sebastian</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Categories Section -->
+    <section class="section trending-categories-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">Trending Categories</h2>
+                <p class="section-subtitle">What's hot right now</p>
+            </div>
+
+            <div class="trending-categories-grid">
+                <div class="trending-category-card">
+                    <div class="trending-category-icon">🎤</div>
+                    <h3 class="trending-category-title">Live Music</h3>
+                    <p class="trending-category-count">420 Events</p>
+                </div>
+                <div class="trending-category-card">
+                    <div class="trending-category-icon">😂</div>
+                    <h3 class="trending-category-title">Comedy</h3>
+                    <p class="trending-category-count">180 Shows</p>
+                </div>
+                <div class="trending-category-card">
+                    <div class="trending-category-icon">🎓</div>
+                    <h3 class="trending-category-title">College Fests</h3>
+                    <p class="trending-category-count">95 Fests</p>
+                </div>
+                <div class="trending-category-card">
+                    <div class="trending-category-icon">🏟️</div>
+                    <h3 class="trending-category-title">Turf Booking</h3>
+                    <p class="trending-category-count">320 Turfs</p>
+                </div>
+                <div class="trending-category-card">
+                    <div class="trending-category-icon">🎸</div>
+                    <h3 class="trending-category-title">Rock Concerts</h3>
+                    <p class="trending-category-count">75 Events</p>
+                </div>
+                <div class="trending-category-card">
+                    <div class="trending-category-icon">🏏</div>
+                    <h3 class="trending-category-title">Cricket</h3>
+                    <p class="trending-category-count">140 Matches</p>
+                </div>
+                <div class="trending-category-card">
+                    <div class="trending-category-icon">🎨</div>
+                    <h3 class="trending-category-title">Workshops</h3>
+                    <p class="trending-category-count">210 Events</p>
+                </div>
+                <div class="trending-category-card">
+                    <div class="trending-category-icon">🎪</div>
+                    <h3 class="trending-category-title">Festivals</h3>
+                    <p class="trending-category-count">89 Events</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section how-it-works-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Book tickets in 3 easy steps</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="step-title">Browse Events</h3>
+                    <p class="step-description">Explore thousands of events across categories and cities</p>
+                </div>
+
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h3 class="step-title">Select & Book</h3>
+                    <p class="step-description">Choose your preferred date, time and seats</p>
+                </div>
+
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="step-title">Enjoy Event</h3>
+                    <p class="step-description">Get instant tickets on your mobile and enjoy!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Join millions of happy customers</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Best ticket booking platform! Booked Sunburn Festival tickets in seconds. The mobile ticket feature is so convenient!"</p>
+                    <div class="testimonial-author">
+                        <img src="img/user-1.jpg" alt="Priya Sharma" class="author-image">
+                        <div class="author-info">
+                            <p class="author-name">Priya Sharma</p>
+                            <p class="author-location">Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Finally found a reliable platform for college fest tickets! Booked tickets for IIT Mood Indigo hassle-free."</p>
+                    <div class="testimonial-author">
+                        <img src="img/user-2.jpg" alt="Rahul Verma" class="author-image">
+                        <div class="author-info">
+                            <p class="author-name">Rahul Verma</p>
+                            <p class="author-location">Delhi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The turf booking feature is amazing! Booked a slot for weekend cricket with friends instantly."</p>
+                    <div class="testimonial-author">
+                        <img src="img/user-3.jpg" alt="Amit Patel" class="author-image">
+                        <div class="author-info">
+                            <p class="author-name">Amit Patel</p>
+                            <p class="author-location">Bangalore</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Got IPL finals tickets at great prices! Customer support was super helpful throughout."</p>
+                    <div class="testimonial-author">
+                        <img src="img/user-4.jpg" alt="Sneha Reddy" class="author-image">
+                        <div class="author-info">
+                            <p class="author-name">Sneha Reddy</p>
+                            <p class="author-location">Hyderabad</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Love the dark mode! Makes browsing events at night so much better. Great design overall."</p>
+                    <div class="testimonial-author">
+                        <img src="img/user-5.jpg" alt="Arjun Mehta" class="author-image">
+                        <div class="author-info">
+                            <p class="author-name">Arjun Mehta</p>
+                            <p class="author-location">Pune</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Refund process was smooth when I had to cancel. Very transparent and quick. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <img src="img/user-6.jpg" alt="Kavya Iyer" class="author-image">
+                        <div class="author-info">
+                            <p class="author-name">Kavya Iyer</p>
+                            <p class="author-location">Chennai</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="section partners-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">Featured In & Partners</h2>
+                <p class="section-subtitle">Trusted by leading brands and media</p>
+            </div>
+
+            <div class="partners-grid">
+                <div class="partner-logo">
+                    <img src="img/partner-1.svg" alt="Times of India">
+                </div>
+                <div class="partner-logo">
+                    <img src="img/partner-2.svg" alt="Economic Times">
+                </div>
+                <div class="partner-logo">
+                    <img src="img/partner-3.svg" alt="NDTV">
+                </div>
+                <div class="partner-logo">
+                    <img src="img/partner-4.svg" alt="Hindustan Times">
+                </div>
+                <div class="partner-logo">
+                    <img src="img/partner-5.svg" alt="Indian Express">
+                </div>
+                <div class="partner-logo">
+                    <img src="img/partner-6.svg" alt="Mint">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="section blog-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">From Our Blog</h2>
+                    <p class="section-subtitle">Latest news and insights from the entertainment world</p>
+                </div>
+                <a href="pages/blog.html" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="img/blog-1.jpg" alt="Blog Post" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-category">Events</span>
+                        <h3 class="blog-title">Top 10 Music Festivals to Attend in India 2024</h3>
+                        <p class="blog-excerpt">Discover the best music festivals happening across India this year...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 10, 2024</span>
+                            <span><i class="fas fa-clock"></i> 5 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="img/blog-2.jpg" alt="Blog Post" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-category">Guide</span>
+                        <h3 class="blog-title">How to Book the Best Turf for Your Team</h3>
+                        <p class="blog-excerpt">Expert tips on finding and booking the perfect sports turf...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 8, 2024</span>
+                            <span><i class="fas fa-clock"></i> 4 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="img/blog-3.jpg" alt="Blog Post" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-category">News</span>
+                        <h3 class="blog-title">College Fest Season 2024: What to Expect</h3>
+                        <p class="blog-excerpt">Get ready for the biggest college fests happening this season...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 5, 2024</span>
+                            <span><i class="fas fa-clock"></i> 6 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download App CTA Section -->
+    <section class="section app-cta-section">
+        <div class="container">
+            <div class="app-cta-content">
+                <div class="app-cta-text">
+                    <h2 class="app-cta-title">Download the Tixbro App</h2>
+                    <p class="app-cta-subtitle">Book tickets on the go with our mobile app. Available on iOS and Android.</p>
+                    <div class="app-cta-features">
+                        <div class="app-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Instant Booking</span>
+                        </div>
+                        <div class="app-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Exclusive Deals</span>
+                        </div>
+                        <div class="app-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Easy Payments</span>
+                        </div>
+                    </div>
+                    <div class="app-download-buttons">
+                        <a href="#" class="app-download-btn">
+                            <i class="fab fa-apple"></i>
+                            <div>
+                                <span class="download-label">Download on the</span>
+                                <span class="download-store">App Store</span>
+                            </div>
+                        </a>
+                        <a href="#" class="app-download-btn">
+                            <i class="fab fa-google-play"></i>
+                            <div>
+                                <span class="download-label">Get it on</span>
+                                <span class="download-store">Google Play</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="app-cta-image">
+                    <img src="img/app-mockup.png" alt="Tixbro App" class="app-mockup">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Got questions? We've got answers</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I book tickets on Tixbro?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Booking tickets is simple! Browse events, select your preferred date and seats, proceed to checkout, make payment, and receive instant tickets on your mobile.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is it safe to book tickets online?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! We use bank-grade encryption for all transactions. Your payment information is completely secure with us.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I cancel my booking and get a refund?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, you can cancel your booking as per the event's cancellation policy. Refunds are processed within 5-7 business days.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I receive my tickets?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Tickets are sent instantly to your email and mobile number. You can also access them from your Tixbro account dashboard.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We accept credit/debit cards, UPI, net banking, and popular digital wallets like Paytm, PhonePe, and Google Pay.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How does turf booking work?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Select your city, choose a turf, pick your preferred date and time slot, make payment, and receive instant booking confirmation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I book tickets for college fests?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! We have a dedicated section for college fests. Browse upcoming fests at top colleges and book passes online.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do you offer customer support?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we offer 24/7 customer support via email, phone, and chat. Our team is always ready to help!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h2 class="newsletter-title">Stay Updated!</h2>
+                    <p class="newsletter-subtitle">Subscribe to get the latest events, exclusive deals, and updates delivered to your inbox.</p>
+                </div>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                    <button type="submit" class="btn btn-primary newsletter-btn">Subscribe</button>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="section-container">
+        <div class="container">
             <div class="footer-grid">
-                <!-- Brand Column -->
                 <div class="footer-column">
-                    <div class="footer-logo">Tixbro</div>
-                    <p class="footer-tagline">
-                        Your Ultimate Event Experience.<br>
-                        Book tickets to the best events across India.
-                    </p>
+                    <h3 class="footer-logo">Tixbro</h3>
+                    <p class="footer-description">India's Premier Ticket Booking Platform for Events, Movies, Concerts, Sports & More.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
 
-                <!-- Discover Column -->
                 <div class="footer-column">
-                    <h3 class="footer-column-title">Discover</h3>
+                    <h4 class="footer-title">Categories</h4>
                     <ul class="footer-links">
-                        <li><a href="shop.html">Concerts</a></li>
-                        <li><a href="shop.html">Comedy Shows</a></li>
-                        <li><a href="shop.html">Sports Events</a></li>
-                        <li><a href="shop.html">Theatre</a></li>
-                        <li><a href="shop.html">Turf Booking</a></li>
-                        <li><a href="shop.html">College Fests</a></li>
+                        <li><a href="shop.html?category=movies">Movies</a></li>
+                        <li><a href="shop.html?category=concerts">Concerts</a></li>
+                        <li><a href="shop.html?category=sports">Sports</a></li>
+                        <li><a href="shop.html?category=theatre">Theatre</a></li>
+                        <li><a href="shop.html?category=turf">Turf Booking</a></li>
+                        <li><a href="shop.html?category=college-fest">College Fests</a></li>
                     </ul>
                 </div>
 
-                <!-- Cities Column -->
                 <div class="footer-column">
-                    <h3 class="footer-column-title">Top Cities</h3>
+                    <h4 class="footer-title">Company</h4>
                     <ul class="footer-links">
-                        <li><a href="shop.html">Mumbai</a></li>
-                        <li><a href="shop.html">Delhi NCR</a></li>
-                        <li><a href="shop.html">Bangalore</a></li>
-                        <li><a href="shop.html">Hyderabad</a></li>
-                        <li><a href="shop.html">Pune</a></li>
-                        <li><a href="shop.html">Chennai</a></li>
+                        <li><a href="pages/about.html">About Us</a></li>
+                        <li><a href="pages/careers.html">Careers</a></li>
+                        <li><a href="pages/blog.html">Blog</a></li>
+                        <li><a href="pages/contact.html">Contact Us</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partnership</a></li>
                     </ul>
                 </div>
 
-                <!-- Company Column -->
                 <div class="footer-column">
-                    <h3 class="footer-column-title">Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-
-                <!-- Support Column -->
-                <div class="footer-column">
-                    <h3 class="footer-column-title">Support</h3>
+                    <h4 class="footer-title">Support</h4>
                     <ul class="footer-links">
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Refund Policy</a></li>
-                        <li><a href="#">Safety Guidelines</a></li>
+                        <li><a href="#">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Footer Bottom -->
             <div class="footer-bottom">
-                <p class="copyright">© 2024 Tixbro. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Terms & Conditions</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Cookie Policy</a>
+                <p>&copy; 2024 Tixbro. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-    </script>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>

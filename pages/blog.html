@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tixbro Blog - Latest News, Tips & Insights about Events">
+    <title>Blog - Tixbro</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="../index.html" class="nav-logo">
+                    <span class="logo-text">Tixbro</span>
+                </a>
+            </div>
+
+            <div class="nav-center">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../shop.html" class="nav-link">Events</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="../login.html" class="btn btn-outline">Sign In</a>
+                <a href="../login.html" class="btn btn-primary">Sign Up</a>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" style="min-height: 50vh;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Tixbro Blog</h1>
+            <p class="hero-subtitle">Latest news, tips & insights from the world of events</p>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="section">
+        <div class="container">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div style="background: var(--bg-primary); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg);">
+                    <div style="height: 400px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white;">
+                        🎉
+                    </div>
+                    <div style="padding: var(--space-2xl);">
+                        <span class="blog-category">Featured</span>
+                        <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); margin: var(--space-lg) 0; color: var(--text-primary);">
+                            The Ultimate Guide to Booking Concert Tickets in India
+                        </h2>
+                        <p style="font-size: 1.125rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: var(--space-xl);">
+                            Everything you need to know about scoring tickets to the hottest concerts in India. From early bird bookings to last-minute deals, we've got you covered with expert tips and insider knowledge.
+                        </p>
+                        <div style="display: flex; align-items: center; gap: var(--space-lg); color: var(--text-tertiary); font-size: 0.9375rem; margin-bottom: var(--space-xl);">
+                            <span><i class="fas fa-calendar me-2"></i> December 12, 2024</span>
+                            <span><i class="fas fa-clock me-2"></i> 8 min read</span>
+                            <span><i class="fas fa-user me-2"></i> Priya Sharma</span>
+                        </div>
+                        <button class="btn btn-primary">Read More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Latest Articles</h2>
+                    <p class="section-subtitle">Stay updated with the latest from Tixbro</p>
+                </div>
+            </div>
+
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="../img/blog-1.jpg" alt="Blog Post" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-category">Events</span>
+                        <h3 class="blog-title">Top 10 Music Festivals to Attend in India 2024</h3>
+                        <p class="blog-excerpt">Discover the best music festivals happening across India this year, from Sunburn to NH7 Weekender...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 10, 2024</span>
+                            <span><i class="fas fa-clock"></i> 5 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="../img/blog-2.jpg" alt="Blog Post" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-category">Guide</span>
+                        <h3 class="blog-title">How to Book the Best Turf for Your Team</h3>
+                        <p class="blog-excerpt">Expert tips on finding and booking the perfect sports turf for your team activities...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 8, 2024</span>
+                            <span><i class="fas fa-clock"></i> 4 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="../img/blog-3.jpg" alt="Blog Post" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-category">News</span>
+                        <h3 class="blog-title">College Fest Season 2024: What to Expect</h3>
+                        <p class="blog-excerpt">Get ready for the biggest college fests happening this season across India...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 5, 2024</span>
+                            <span><i class="fas fa-clock"></i> 6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div style="height: 220px; background: linear-gradient(135deg, var(--gold), #FFD700); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🎭</div>
+                    <div class="blog-content">
+                        <span class="blog-category">Theatre</span>
+                        <h3 class="blog-title">Rise of Standup Comedy in India</h3>
+                        <p class="blog-excerpt">How standup comedy became one of India's most popular entertainment forms...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 3, 2024</span>
+                            <span><i class="fas fa-clock"></i> 7 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div style="height: 220px; background: linear-gradient(135deg, var(--teal), #00C9A7); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">⚽</div>
+                    <div class="blog-content">
+                        <span class="blog-category">Sports</span>
+                        <h3 class="blog-title">IPL 2024: Everything You Need to Know</h3>
+                        <p class="blog-excerpt">Complete guide to IPL 2024 including schedule, teams, and how to book tickets...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Nov 30, 2024</span>
+                            <span><i class="fas fa-clock"></i> 6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div style="height: 220px; background: linear-gradient(135deg, var(--maroon), #A01F49); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🎪</div>
+                    <div class="blog-content">
+                        <span class="blog-category">Tips</span>
+                        <h3 class="blog-title">First-Time Festival Goer's Survival Guide</h3>
+                        <p class="blog-excerpt">Essential tips and tricks for making the most of your first music festival experience...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Nov 28, 2024</span>
+                            <span><i class="fas fa-clock"></i> 5 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div style="height: 220px; background: linear-gradient(135deg, #667EEA, #764BA2); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🎓</div>
+                    <div class="blog-content">
+                        <span class="blog-category">College</span>
+                        <h3 class="blog-title">Most Anticipated College Fests of 2024</h3>
+                        <p class="blog-excerpt">From IIT Bombay's Mood Indigo to BITS Pilani's Oasis, here are the must-attend college fests...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Nov 25, 2024</span>
+                            <span><i class="fas fa-clock"></i> 8 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div style="height: 220px; background: linear-gradient(135deg, #F093FB, #F5576C); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🎵</div>
+                    <div class="blog-content">
+                        <span class="blog-category">Music</span>
+                        <h3 class="blog-title">Electronic Music Scene in India: 2024 Edition</h3>
+                        <p class="blog-excerpt">Exploring the growing electronic music culture and festivals across India...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Nov 22, 2024</span>
+                            <span><i class="fas fa-clock"></i> 9 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div style="height: 220px; background: linear-gradient(135deg, #4FACFE, #00F2FE); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">💡</div>
+                    <div class="blog-content">
+                        <span class="blog-category">Technology</span>
+                        <h3 class="blog-title">How Technology is Transforming Event Ticketing</h3>
+                        <p class="blog-excerpt">The future of event ticketing with blockchain, NFTs, and mobile-first experiences...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Nov 20, 2024</span>
+                            <span><i class="fas fa-clock"></i> 7 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
+                    <p class="newsletter-subtitle">Get the latest blog posts, event updates, and exclusive deals delivered to your inbox.</p>
+                </div>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                    <button type="submit" class="btn btn-primary newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-logo">Tixbro</h3>
+                    <p class="footer-description">India's Premier Ticket Booking Platform for Events, Movies, Concerts, Sports & More.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-title">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="../shop.html?category=movies">Movies</a></li>
+                        <li><a href="../shop.html?category=concerts">Concerts</a></li>
+                        <li><a href="../shop.html?category=sports">Sports</a></li>
+                        <li><a href="../shop.html?category=theatre">Theatre</a></li>
+                        <li><a href="../shop.html?category=turf">Turf Booking</a></li>
+                        <li><a href="../shop.html?category=college-fest">College Fests</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partnership</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tixbro. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+</body>
+</html>
