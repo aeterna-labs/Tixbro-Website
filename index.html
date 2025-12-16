@@ -1421,13 +1421,29 @@
         <div class="container">
             <div class="newsletter-content">
                 <div class="newsletter-text">
-                    <h2 class="newsletter-title">Stay Updated!</h2>
-                    <p class="newsletter-subtitle">Subscribe to get the latest events, exclusive deals, and updates delivered to your inbox.</p>
+                    <h2 class="newsletter-title">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Updates!
+                    </h2>
+                    <p class="newsletter-subtitle">Abonniere unseren WhatsApp Newsletter und erhalte exklusive Event-Angebote, Early-Bird-Tickets und Updates direkt auf dein Handy!</p>
                 </div>
                 <form class="newsletter-form" id="newsletterForm">
-                    <input type="email" placeholder="Enter your email" class="newsletter-input" required>
-                    <button type="submit" class="btn btn-primary newsletter-btn">Subscribe</button>
+                    <div class="phone-input-wrapper">
+                        <select class="country-code" id="countryCode">
+                            <option value="+91" selected>🇮🇳 +91</option>
+                            <option value="+49">🇩🇪 +49</option>
+                            <option value="+1">🇺🇸 +1</option>
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+971">🇦🇪 +971</option>
+                        </select>
+                        <input type="tel" placeholder="Telefonnummer eingeben" class="newsletter-input phone-input" id="phoneNumber" pattern="[0-9]{10}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary newsletter-btn">
+                        <i class="fab fa-whatsapp"></i> Jetzt Abonnieren
+                    </button>
                 </form>
+                <p class="newsletter-privacy">
+                    <i class="fas fa-lock"></i> Deine Nummer ist sicher. Kein Spam, jederzeit abmelden.
+                </p>
             </div>
         </div>
     </section>
@@ -1440,6 +1456,7 @@
                     <h3 class="footer-logo">Tixbro</h3>
                     <p class="footer-description">India's Premier Ticket Booking Platform for Events, Movies, Concerts, Sports & More.</p>
                     <div class="social-links">
+                        <a href="#" class="social-link whatsapp" title="WhatsApp Updates"><i class="fab fa-whatsapp"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>

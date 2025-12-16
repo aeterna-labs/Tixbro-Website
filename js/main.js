@@ -180,7 +180,7 @@ const initBackToTop = () => {
     });
 };
 
-// ====== Newsletter Form Handler ======
+// ====== Newsletter Form Handler (WhatsApp) ======
 const initNewsletterForm = () => {
     const form = document.getElementById('newsletterForm');
 
@@ -189,28 +189,42 @@ const initNewsletterForm = () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const emailInput = form.querySelector('input[type="email"]');
-        const email = emailInput.value.trim();
+        const phoneInput = document.getElementById('phoneNumber');
+        const countryCode = document.getElementById('countryCode');
+        const phoneNumber = phoneInput.value.trim();
+        const fullNumber = countryCode.value + phoneNumber;
 
-        // Basic email validation
-        if (!isValidEmail(email)) {
-            showNotification('Please enter a valid email address', 'error');
+        // Basic phone number validation
+        if (!isValidPhoneNumber(phoneNumber)) {
+            showNotification('Bitte gib eine gültige Telefonnummer ein (10 Ziffern)', 'error');
             return;
         }
 
-        // Simulate API call
+        // Simulate API call to save phone number for WhatsApp newsletter
         const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Subscribing...';
+        const originalHTML = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Wird abonniert...';
         submitBtn.disabled = true;
 
+        // Here you would typically send the phone number to your backend
+        // which would then add it to your WhatsApp newsletter list
         setTimeout(() => {
-            showNotification('Successfully subscribed to newsletter!', 'success');
-            emailInput.value = '';
-            submitBtn.textContent = originalText;
+            showNotification('Erfolgreich angemeldet! Du erhältst bald WhatsApp Updates 🎉', 'success');
+            phoneInput.value = '';
+            submitBtn.innerHTML = originalHTML;
             submitBtn.disabled = false;
+
+            // Store in localStorage for demo purposes
+            localStorage.setItem('whatsapp_subscribed', fullNumber);
         }, 1500);
     });
+};
+
+// Phone number validation
+const isValidPhoneNumber = (phone) => {
+    // Basic validation: 10 digits
+    const phoneRegex = /^[0-9]{10}$/;
+    return phoneRegex.test(phone);
 };
 
 // ====== Contact Form Handler ======

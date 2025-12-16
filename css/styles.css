@@ -1349,24 +1349,65 @@ a {
     gap: var(--space-md);
 }
 
+.phone-input-wrapper {
+    flex: 1;
+    display: flex;
+    gap: 0;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-full);
+    background: var(--bg-primary);
+    transition: all var(--transition-base);
+    overflow: hidden;
+}
+
+.phone-input-wrapper:focus-within {
+    border-color: var(--primary);
+}
+
+.country-code {
+    padding: 1rem 0.75rem;
+    border: none;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+}
+
 .newsletter-input {
     flex: 1;
     padding: 1rem 1.5rem;
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-full);
+    border: none;
     font-size: 1rem;
-    background: var(--bg-primary);
+    background: transparent;
     color: var(--text-primary);
-    transition: all var(--transition-base);
+    outline: none;
 }
 
-.newsletter-input:focus {
-    outline: none;
-    border-color: var(--primary);
+.phone-input {
+    border-radius: 0 var(--radius-full) var(--radius-full) 0;
 }
 
 .newsletter-btn {
     flex-shrink: 0;
+    gap: 0.5rem;
+}
+
+.newsletter-btn i {
+    font-size: 1.25rem;
+}
+
+.newsletter-privacy {
+    margin-top: var(--space-md);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.newsletter-privacy i {
+    color: var(--success);
+    margin-right: 0.25rem;
 }
 
 @media (max-width: 576px) {
@@ -1375,6 +1416,10 @@ a {
     }
 
     .newsletter-btn {
+        width: 100%;
+    }
+
+    .phone-input-wrapper {
         width: 100%;
     }
 }
@@ -1431,6 +1476,16 @@ a {
     background: var(--primary);
     color: white;
     transform: translateY(-4px);
+}
+
+.social-link.whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+}
+
+.social-link.whatsapp:hover {
+    background: linear-gradient(135deg, #128C7E, #075E54);
+    transform: translateY(-4px) scale(1.05);
 }
 
 .footer-title {
