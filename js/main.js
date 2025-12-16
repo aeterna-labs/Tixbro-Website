@@ -196,20 +196,20 @@ const initNewsletterForm = () => {
 
         // Basic phone number validation
         if (!isValidPhoneNumber(phoneNumber)) {
-            showNotification('Bitte gib eine gültige Telefonnummer ein (10 Ziffern)', 'error');
+            showNotification('Please enter a valid phone number (10 digits)', 'error');
             return;
         }
 
         // Simulate API call to save phone number for WhatsApp newsletter
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalHTML = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Wird abonniert...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
         submitBtn.disabled = true;
 
         // Here you would typically send the phone number to your backend
         // which would then add it to your WhatsApp newsletter list
         setTimeout(() => {
-            showNotification('Erfolgreich angemeldet! Du erhältst bald WhatsApp Updates 🎉', 'success');
+            showNotification('Successfully subscribed! You\'ll receive WhatsApp updates soon 🎉', 'success');
             phoneInput.value = '';
             submitBtn.innerHTML = originalHTML;
             submitBtn.disabled = false;
