@@ -661,12 +661,6 @@ a {
     color: var(--text-secondary);
 }
 
-@media (max-width: 576px) {
-    .event-card {
-        flex: 0 0 280px;
-    }
-}
-
 /* ====== Service Cards Grid ====== */
 .services-grid {
     display: grid;
@@ -1622,5 +1616,196 @@ a {
     :root {
         --space-3xl: 1.5rem;
         --space-2xl: 1rem;
+        --space-xl: 0.875rem;
+        --space-lg: 0.75rem;
+    }
+
+    /* Make grids 2 columns for more compact mobile layout */
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+    }
+
+    .service-card {
+        padding: var(--space-lg);
+    }
+
+    .service-icon {
+        font-size: 2rem;
+    }
+
+    .service-title {
+        font-size: 0.875rem;
+    }
+
+    .service-description {
+        font-size: 0.75rem;
+        display: none; /* Hide descriptions on mobile to save space */
+    }
+
+    /* Event cards - 2 cards side by side */
+    .events-carousel {
+        gap: var(--space-md);
+    }
+
+    .event-card {
+        flex: 0 0 calc(50% - 0.5rem);
+        min-width: calc(50% - 0.5rem);
+    }
+
+    .event-title {
+        font-size: 0.875rem;
+    }
+
+    .event-meta {
+        font-size: 0.7rem;
+    }
+
+    /* Features grid - 2 columns */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+    }
+
+    .feature-card {
+        padding: var(--space-lg);
+    }
+
+    .feature-icon {
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+    }
+
+    .feature-title {
+        font-size: 0.875rem;
+    }
+
+    .feature-description {
+        font-size: 0.75rem;
+    }
+
+    /* Stats - 2 columns instead of 4 */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Cities grid - 2 columns */
+    .cities-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    .city-name {
+        font-size: 0.875rem;
+    }
+
+    .city-events {
+        font-size: 0.75rem;
+    }
+
+    /* Artists grid - 4 columns */
+    .artists-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-lg);
+    }
+
+    .artist-bubble {
+        width: 100%;
+    }
+
+    .artist-image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .artist-name {
+        font-size: 0.75rem;
+    }
+
+    /* Trending Categories - 2 columns */
+    .trending-categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+    }
+
+    .trending-category-card {
+        padding: var(--space-lg);
+    }
+
+    .trending-category-icon {
+        font-size: 2rem;
+    }
+
+    .trending-category-title {
+        font-size: 0.875rem;
+    }
+
+    /* How it works - keep vertical on mobile, but compact */
+    .steps-container {
+        flex-direction: column;
+    }
+
+    .step-arrow {
+        display: none;
+    }
+
+    .step-card {
+        padding: var(--space-lg);
+    }
+
+    /* Testimonials - keep 1 column (too much text for 2) */
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    /* Blog grid - 1 column (images need width) */
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    /* FAQ - compact */
+    .faq-question {
+        padding: var(--space-md);
+        font-size: 0.875rem;
+    }
+
+    .faq-answer {
+        padding: var(--space-md);
+        font-size: 0.8rem;
+    }
+
+    /* Section headers - compact */
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.875rem;
+    }
+
+    /* Hero section - compact */
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .hero-categories {
+        gap: 0.5rem;
+    }
+
+    .category-chip {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    /* Reduce section padding */
+    .section {
+        padding: var(--space-2xl) 0;
     }
 }
