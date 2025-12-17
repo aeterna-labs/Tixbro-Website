@@ -163,20 +163,64 @@ function updateThemeIcon(theme) {
 function initMobileMenu() {
     const toggle = document.getElementById('mobileMenuToggle');
     const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
 
-    toggle?.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
+    // Toggle sidebar
+    toggle?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleSidebar();
     });
 
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-            if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
-                sidebar.classList.remove('active');
-            }
+    // Close sidebar when clicking overlay
+    overlay?.addEventListener('click', () => {
+        closeSidebar();
+    });
+
+    // Close sidebar when clicking nav items on mobile
+    if (window.innerWidth <= 768) {
+        const navItems = sidebar?.querySelectorAll('.nav-item');
+        navItems?.forEach(item => {
+            item.addEventListener('click', () => {
+                closeSidebar();
+            });
+        });
+    }
+
+    // Close sidebar on window resize if > 768px
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeSidebar();
         }
     });
 }
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    sidebar?.classList.toggle('active');
+    overlay?.classList.toggle('active');
+
+    // Prevent body scroll when sidebar is open
+    if (sidebar?.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    sidebar?.classList.remove('active');
+    overlay?.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Make functions globally accessible
+window.toggleSidebar = toggleSidebar;
+window.closeSidebar = closeSidebar;
 
 // ====== Charts ======
 let revenueChart = null;
