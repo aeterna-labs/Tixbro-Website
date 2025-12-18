@@ -108,7 +108,12 @@ function navigateToSection(section) {
         'overview': 'overviewSection',
         'events': 'eventsSection',
         'analytics': 'analyticsSection',
-        'create': 'createSection'
+        'create': 'createSection',
+        'bookings': 'bookingsSection',
+        'turf-slots': 'turfSlotsSection',
+        'tickets': 'ticketsSection',
+        'revenue': 'revenueSection',
+        'settings': 'settingsSection'
     };
 
     const targetSection = document.getElementById(sectionMap[section]);
@@ -121,7 +126,12 @@ function navigateToSection(section) {
         'overview': 'Dashboard Overview',
         'events': 'My Events',
         'analytics': 'Analytics & Insights',
-        'create': 'Create New Event'
+        'create': 'Create New Event',
+        'bookings': 'Bookings & Orders',
+        'turf-slots': 'Turf Slot Management',
+        'tickets': 'Ticket Management',
+        'revenue': 'Revenue & Payouts',
+        'settings': 'Settings'
     };
 
     document.getElementById('pageTitle').textContent = titles[section] || 'Dashboard';
@@ -432,6 +442,15 @@ function loadEventsGrid() {
                         <span>Views</span>
                     </div>
                 </div>
+                <div class="ticket-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${(event.soldTickets / event.totalTickets * 100)}%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>${Math.round(event.soldTickets / event.totalTickets * 100)}% Sold</span>
+                        <span>${event.soldTickets}/${event.totalTickets} tickets</span>
+                    </div>
+                </div>
             </div>
         </div>
     `).join('');
@@ -690,3 +709,158 @@ document.getElementById('searchInput')?.addEventListener('input', (e) => {
     // Implement search logic here
     console.log('Searching for:', searchTerm);
 });
+
+// ====== Company Portal Features Integration ======
+
+// Import company portal functions
+import {
+    loadCompanyBookings,
+    displayBookings,
+    loadTurfEvents,
+    generateTimeSlots,
+    displayTurfSlots
+} from './company-portal.js';
+
+// Load bookings when section is active
+function initBookingsSection() {
+    const bookingFilter = document.getElementById('bookingFilter');
+    if (bookingFilter) {
+        bookingFilter.addEventListener('change', async (e) => {
+            await loadBookingsData(e.target.value);
+        });
+    }
+
+    // Initial load
+    loadBookingsData('all');
+}
+
+async function loadBookingsData(filter = 'all') {
+    // Demo company ID - replace with actual logged-in company ID
+    const companyId = 'demo_company_123';
+
+    const result = await loadCompanyBookings(companyId, filter);
+    if (result.success) {
+        displayBookings(result.bookings);
+    } else {
+        console.error('Error loading bookings:', result.error);
+    }
+}
+
+// Load turf slots when section is active
+function initTurfSlotsSection() {
+    const turfSelector = document.getElementById('turfEventSelector');
+    const dateSelector = document.getElementById('turfDateSelector');
+
+    if (turfSelector) {
+        // Load turf events
+        loadTurfEventsData();
+
+        turfSelector.addEventListener('change', (e) => {
+            if (e.target.value) {
+                loadTurfSlotsByDate();
+            }
+        });
+    }
+
+    if (dateSelector) {
+        // Set today as default
+        dateSelector.valueAsDate = new Date();
+
+        dateSelector.addEventListener('change', () => {
+            loadTurfSlotsByDate();
+        });
+    }
+
+    // Date navigation buttons
+    const prevDateBtn = document.getElementById('prevDateBtn');
+    const nextDateBtn = document.getElementById('nextDateBtn');
+
+    if (prevDateBtn) {
+        prevDateBtn.addEventListener('click', () => {
+            const currentDate = new Date(dateSelector.value);
+            currentDate.setDate(currentDate.getDate() - 1);
+            dateSelector.valueAsDate = currentDate;
+            loadTurfSlotsByDate();
+        });
+    }
+
+    if (nextDateBtn) {
+        nextDateBtn.addEventListener('click', () => {
+            const currentDate = new Date(dateSelector.value);
+            currentDate.setDate(currentDate.getDate() + 1);
+            dateSelector.valueAsDate = currentDate;
+            loadTurfSlotsByDate();
+        });
+    }
+}
+
+async function loadTurfEventsData() {
+    // Demo company ID - replace with actual logged-in company ID
+    const companyId = 'demo_company_123';
+
+    const result = await loadTurfEvents(companyId);
+    if (result.success && result.turfs.length > 0) {
+        const selector = document.getElementById('turfEventSelector');
+        selector.innerHTML = '<option value="">Select Turf...</option>' +
+            result.turfs.map(turf => `
+                <option value="${turf.eventId}" data-price="${turf.price}">
+                    ${turf.title} - ${turf.city}
+                </option>
+            `).join('');
+    }
+}
+
+async function loadTurfSlotsByDate() {
+    const selector = document.getElementById('turfEventSelector');
+    const dateSelector = document.getElementById('turfDateSelector');
+
+    if (!selector.value || !dateSelector.value) return;
+
+    const selectedTurf = selector.options[selector.selectedIndex];
+    const turfPrice = parseInt(selectedTurf.dataset.price) || 500;
+    const date = dateSelector.value;
+
+    // Update display
+    document.getElementById('selectedTurfName').textContent = selectedTurf.text.split(' - ')[0];
+    document.getElementById('selectedTurfLocation').textContent = selectedTurf.text.split(' - ')[1] || 'India';
+    document.getElementById('currentDateDisplay').textContent = new Date(date).toLocaleDateString('en-IN', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+
+    // Generate slots
+    const slots = generateTimeSlots(date, turfPrice);
+
+    // Load bookings for this date
+    const companyId = 'demo_company_123';
+    const bookingsResult = await loadCompanyBookings(companyId);
+    const relevantBookings = bookingsResult.success
+        ? bookingsResult.bookings.filter(b => b.eventDate === date)
+        : [];
+
+    // Display slots
+    displayTurfSlots(slots, relevantBookings);
+}
+
+// Initialize company portal sections when navigating
+const originalNavigate = window.navigateToSection;
+window.navigateToSection = function(section) {
+    originalNavigate(section);
+
+    // Initialize specific sections
+    if (section === 'bookings') {
+        setTimeout(initBookingsSection, 100);
+    } else if (section === 'turf-slots') {
+        setTimeout(initTurfSlotsSection, 100);
+    }
+};
+
+// Auto-load bookings and turf data on dashboard load
+document.addEventListener('DOMContentLoaded', () => {
+    // Load initial data
+    setTimeout(() => {
+        loadBookingsData('all');
+    }, 1000);
+});
+
