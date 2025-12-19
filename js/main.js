@@ -3,42 +3,13 @@
  * Complete functionality including dark mode, mobile menu, smooth scrolling, etc.
  */
 
-// ====== Dark Mode Toggle ======
+// ====== Dark Mode (Permanent) ======
 const initDarkMode = () => {
-    const themeToggle = document.getElementById('themeToggle');
     const html = document.documentElement;
 
-    if (!themeToggle) return;
-
-    // Check for saved theme preference or default to 'light'
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', currentTheme);
-
-    // Update icon based on current theme
-    updateThemeIcon(currentTheme);
-
-    // Toggle theme on button click
-    themeToggle.addEventListener('click', () => {
-        const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-    });
-};
-
-const updateThemeIcon = (theme) => {
-    const themeToggle = document.getElementById('themeToggle');
-    if (!themeToggle) return;
-
-    const icon = themeToggle.querySelector('i');
-
-    if (theme === 'dark') {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    }
+    // Always set dark mode
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
 };
 
 // ====== Mobile Menu Toggle ======
