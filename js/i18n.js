@@ -101,6 +101,119 @@ const translations = {
         'common.loading': 'Loading...',
         'common.error': 'Something went wrong',
         'common.success': 'Success!',
+        'common.cancel': 'Cancel',
+        'common.save': 'Save',
+        'common.delete': 'Delete',
+        'common.edit': 'Edit',
+        'common.view': 'View',
+        'common.close': 'Close',
+        'common.back': 'Back',
+        'common.next': 'Next',
+        'common.submit': 'Submit',
+        'common.confirm': 'Confirm',
+
+        // Login Page
+        'login.title': 'Sign In to Tixbro',
+        'login.subtitle': 'Access your account to book events and manage bookings',
+        'login.email': 'Email Address',
+        'login.password': 'Password',
+        'login.remember': 'Remember me',
+        'login.forgot': 'Forgot Password?',
+        'login.signin': 'Sign In',
+        'login.signup': 'Sign Up',
+        'login.or': 'Or continue with',
+        'login.google': 'Continue with Google',
+        'login.noaccount': "Don't have an account?",
+        'login.hasaccount': 'Already have an account?',
+
+        // Checkout Page
+        'checkout.title': 'Checkout',
+        'checkout.summary': 'Order Summary',
+        'checkout.event': 'Event',
+        'checkout.date': 'Date',
+        'checkout.time': 'Time',
+        'checkout.venue': 'Venue',
+        'checkout.quantity': 'Quantity',
+        'checkout.price': 'Price',
+        'checkout.subtotal': 'Subtotal',
+        'checkout.fees': 'Booking Fees',
+        'checkout.total': 'Total',
+        'checkout.customer': 'Customer Details',
+        'checkout.name': 'Full Name',
+        'checkout.email': 'Email',
+        'checkout.phone': 'Phone Number',
+        'checkout.payment': 'Payment Method',
+        'checkout.card': 'Credit/Debit Card',
+        'checkout.upi': 'UPI',
+        'checkout.wallet': 'Wallet',
+        'checkout.paynow': 'Pay Now',
+        'checkout.terms': 'I agree to the terms and conditions',
+
+        // Event Details Page
+        'event.booknow': 'Book Now',
+        'event.booktickets': 'Book Tickets',
+        'event.about': 'About Event',
+        'event.venue': 'Venue',
+        'event.date': 'Date & Time',
+        'event.category': 'Category',
+        'event.organizer': 'Organizer',
+        'event.tickets': 'Tickets',
+        'event.available': 'Available',
+        'event.soldout': 'Sold Out',
+        'event.share': 'Share Event',
+        'event.save': 'Save Event',
+        'event.location': 'Location',
+        'event.directions': 'Get Directions',
+        'event.similar': 'Similar Events',
+
+        // Success Page
+        'success.title': 'Booking Successful!',
+        'success.message': 'Your booking has been confirmed',
+        'success.email': 'A confirmation email has been sent to',
+        'success.order': 'Order ID',
+        'success.download': 'Download Ticket',
+        'success.view': 'View Ticket',
+        'success.home': 'Back to Home',
+        'success.events': 'Browse More Events',
+
+        // Cancel Page
+        'cancel.title': 'Payment Cancelled',
+        'cancel.message': 'Your payment was cancelled',
+        'cancel.retry': 'Try Again',
+        'cancel.home': 'Back to Home',
+
+        // Ticket View Page
+        'ticket.title': 'Your Ticket',
+        'ticket.event': 'Event',
+        'ticket.customer': 'Customer',
+        'ticket.order': 'Order ID',
+        'ticket.status': 'Status',
+        'ticket.valid': 'Valid',
+        'ticket.used': 'Used',
+        'ticket.download': 'Download PDF',
+        'ticket.print': 'Print Ticket',
+        'ticket.qr': 'Scan QR Code at Venue',
+        'ticket.instructions': 'Entry Instructions',
+
+        // About Page
+        'about.title': 'About Tixbro',
+        'about.mission': 'Our Mission',
+        'about.vision': 'Our Vision',
+        'about.team': 'Our Team',
+        'about.values': 'Our Values',
+
+        // Contact Page
+        'contact.title': 'Contact Us',
+        'contact.subtitle': 'Get in touch with us',
+        'contact.name': 'Your Name',
+        'contact.email': 'Your Email',
+        'contact.subject': 'Subject',
+        'contact.message': 'Message',
+        'contact.send': 'Send Message',
+        'contact.info': 'Contact Information',
+        'contact.address': 'Address',
+        'contact.phone': 'Phone',
+        'contact.hours': 'Business Hours',
     },
 
     hi: {
@@ -202,6 +315,119 @@ const translations = {
         'common.loading': 'लोड हो रहा है...',
         'common.error': 'कुछ गलत हो गया',
         'common.success': 'सफलता!',
+        'common.cancel': 'रद्द करें',
+        'common.save': 'सहेजें',
+        'common.delete': 'हटाएं',
+        'common.edit': 'संपादित करें',
+        'common.view': 'देखें',
+        'common.close': 'बंद करें',
+        'common.back': 'वापस',
+        'common.next': 'अगला',
+        'common.submit': 'जमा करें',
+        'common.confirm': 'पुष्टि करें',
+
+        // Login Page
+        'login.title': 'Tixbro में साइन इन करें',
+        'login.subtitle': 'इवेंट बुक करने और बुकिंग प्रबंधित करने के लिए अपने खाते में पहुंचें',
+        'login.email': 'ईमेल पता',
+        'login.password': 'पासवर्ड',
+        'login.remember': 'मुझे याद रखें',
+        'login.forgot': 'पासवर्ड भूल गए?',
+        'login.signin': 'साइन इन करें',
+        'login.signup': 'साइन अप करें',
+        'login.or': 'या जारी रखें',
+        'login.google': 'Google से जारी रखें',
+        'login.noaccount': 'खाता नहीं है?',
+        'login.hasaccount': 'पहले से ही खाता है?',
+
+        // Checkout Page
+        'checkout.title': 'चेकआउट',
+        'checkout.summary': 'ऑर्डर सारांश',
+        'checkout.event': 'इवेंट',
+        'checkout.date': 'तारीख',
+        'checkout.time': 'समय',
+        'checkout.venue': 'स्थान',
+        'checkout.quantity': 'मात्रा',
+        'checkout.price': 'मूल्य',
+        'checkout.subtotal': 'उपकुल',
+        'checkout.fees': 'बुकिंग शुल्क',
+        'checkout.total': 'कुल',
+        'checkout.customer': 'ग्राहक विवरण',
+        'checkout.name': 'पूरा नाम',
+        'checkout.email': 'ईमेल',
+        'checkout.phone': 'फ़ोन नंबर',
+        'checkout.payment': 'भुगतान विधि',
+        'checkout.card': 'क्रेडिट/डेबिट कार्ड',
+        'checkout.upi': 'UPI',
+        'checkout.wallet': 'वॉलेट',
+        'checkout.paynow': 'अभी भुगतान करें',
+        'checkout.terms': 'मैं नियम और शर्तों से सहमत हूं',
+
+        // Event Details Page
+        'event.booknow': 'अभी बुक करें',
+        'event.booktickets': 'टिकट बुक करें',
+        'event.about': 'इवेंट के बारे में',
+        'event.venue': 'स्थान',
+        'event.date': 'तारीख और समय',
+        'event.category': 'श्रेणी',
+        'event.organizer': 'आयोजक',
+        'event.tickets': 'टिकट',
+        'event.available': 'उपलब्ध',
+        'event.soldout': 'बिक गया',
+        'event.share': 'इवेंट शेयर करें',
+        'event.save': 'इवेंट सहेजें',
+        'event.location': 'स्थान',
+        'event.directions': 'दिशा-निर्देश प्राप्त करें',
+        'event.similar': 'समान इवेंट्स',
+
+        // Success Page
+        'success.title': 'बुकिंग सफल!',
+        'success.message': 'आपकी बुकिंग की पुष्टि हो गई है',
+        'success.email': 'पुष्टिकरण ईमेल भेजा गया है',
+        'success.order': 'ऑर्डर ID',
+        'success.download': 'टिकट डाउनलोड करें',
+        'success.view': 'टिकट देखें',
+        'success.home': 'होम पर वापस',
+        'success.events': 'अधिक इवेंट्स ब्राउज़ करें',
+
+        // Cancel Page
+        'cancel.title': 'भुगतान रद्द किया गया',
+        'cancel.message': 'आपका भुगतान रद्द कर दिया गया था',
+        'cancel.retry': 'पुनः प्रयास करें',
+        'cancel.home': 'होम पर वापस',
+
+        // Ticket View Page
+        'ticket.title': 'आपका टिकट',
+        'ticket.event': 'इवेंट',
+        'ticket.customer': 'ग्राहक',
+        'ticket.order': 'ऑर्डर ID',
+        'ticket.status': 'स्थिति',
+        'ticket.valid': 'मान्य',
+        'ticket.used': 'उपयोग किया गया',
+        'ticket.download': 'PDF डाउनलोड करें',
+        'ticket.print': 'टिकट प्रिंट करें',
+        'ticket.qr': 'स्थान पर QR कोड स्कैन करें',
+        'ticket.instructions': 'प्रवेश निर्देश',
+
+        // About Page
+        'about.title': 'Tixbro के बारे में',
+        'about.mission': 'हमारा मिशन',
+        'about.vision': 'हमारी दृष्टि',
+        'about.team': 'हमारी टीम',
+        'about.values': 'हमारे मूल्य',
+
+        // Contact Page
+        'contact.title': 'हमसे संपर्क करें',
+        'contact.subtitle': 'हमसे संपर्क में रहें',
+        'contact.name': 'आपका नाम',
+        'contact.email': 'आपका ईमेल',
+        'contact.subject': 'विषय',
+        'contact.message': 'संदेश',
+        'contact.send': 'संदेश भेजें',
+        'contact.info': 'संपर्क जानकारी',
+        'contact.address': 'पता',
+        'contact.phone': 'फ़ोन',
+        'contact.hours': 'कार्य समय',
     }
 };
 
@@ -302,35 +528,66 @@ class LanguageManager {
         const trans = translations[lang];
         if (!trans) return;
 
-        // Translate all elements with data-i18n attribute
+        // Translate all elements with data-i18n attribute (text content)
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.dataset.i18n;
             if (trans[key]) {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = trans[key];
-                } else {
-                    // Handle HTML content preservation
-                    const hasHTML = el.querySelector('i, span, br');
-                    if (hasHTML) {
-                        // Preserve icons and other HTML elements
-                        const icons = Array.from(el.querySelectorAll('i')).map(i => i.outerHTML);
-                        let text = trans[key];
+                // Handle HTML content preservation
+                const hasHTML = el.querySelector('i, span, br');
+                if (hasHTML) {
+                    // Preserve icons and other HTML elements
+                    const icons = Array.from(el.querySelectorAll('i')).map(i => i.outerHTML);
+                    let text = trans[key];
 
-                        // Re-insert icons if they exist
-                        if (icons.length > 0) {
-                            text = icons[0] + ' ' + text;
-                        }
-
-                        el.innerHTML = text;
-                    } else {
-                        el.textContent = trans[key];
+                    // Re-insert icons if they exist
+                    if (icons.length > 0) {
+                        text = icons[0] + ' ' + text;
                     }
+
+                    el.innerHTML = text;
+                } else {
+                    el.textContent = trans[key];
                 }
+            }
+        });
+
+        // Translate all placeholders with data-i18n-placeholder attribute
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.dataset.i18nPlaceholder;
+            if (trans[key]) {
+                el.placeholder = trans[key];
+            }
+        });
+
+        // Translate all titles with data-i18n-title attribute
+        document.querySelectorAll('[data-i18n-title]').forEach(el => {
+            const key = el.dataset.i18nTitle;
+            if (trans[key]) {
+                el.title = trans[key];
+            }
+        });
+
+        // Translate all aria-labels with data-i18n-aria attribute
+        document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+            const key = el.dataset.i18nAria;
+            if (trans[key]) {
+                el.setAttribute('aria-label', trans[key]);
+            }
+        });
+
+        // Translate all values with data-i18n-value attribute (for buttons, options)
+        document.querySelectorAll('[data-i18n-value]').forEach(el => {
+            const key = el.dataset.i18nValue;
+            if (trans[key]) {
+                el.value = trans[key];
             }
         });
 
         // Update HTML lang attribute
         document.documentElement.lang = lang === 'hi' ? 'hi' : 'en';
+
+        // Trigger custom event for other scripts to react to language change
+        window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
     }
 
     t(key) {
