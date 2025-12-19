@@ -2056,3 +2056,19 @@ a {
     border-radius: 0 !important;
     margin-top: 1.5rem !important;
 }
+
+/* ====== Search Field Text Color Fix ====== */
+.search-input,
+.hero-search input {
+    color: #000000 !important;
+}
+
+.search-input::placeholder,
+.hero-search input::placeholder {
+    color: #666666 !important;
+}
+
+/* Ensure search input background is light */
+.hero-search input {
+    background-color: #ffffff !important;
+}

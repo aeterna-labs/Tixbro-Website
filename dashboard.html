@@ -23,6 +23,7 @@
 
     <!-- i18n Language Support -->
     <script src="js/i18n.js"></script>
+    <script src="js/dashboard-i18n.js"></script>
 </head>
 <body class="dashboard-body">
     <!-- Sidebar Overlay (Mobile) -->
@@ -54,39 +55,39 @@
         <nav class="sidebar-nav">
             <a href="#overview" class="nav-item active" data-section="overview">
                 <i class="fas fa-home"></i>
-                <span>Overview</span>
+                <span data-i18n="dash.overview">Overview</span>
             </a>
             <a href="#events" class="nav-item" data-section="events">
                 <i class="fas fa-calendar-alt"></i>
-                <span>My Events</span>
+                <span data-i18n="dash.events">My Events</span>
             </a>
             <a href="#analytics" class="nav-item" data-section="analytics">
                 <i class="fas fa-chart-line"></i>
-                <span>Analytics</span>
+                <span data-i18n="dash.analytics">Analytics</span>
             </a>
             <a href="#create" class="nav-item nav-item-highlight" data-section="create">
                 <i class="fas fa-plus-circle"></i>
-                <span>Create Event</span>
+                <span data-i18n="dash.create">Create Event</span>
             </a>
             <a href="#bookings" class="nav-item" data-section="bookings">
                 <i class="fas fa-receipt"></i>
-                <span>Bookings</span>
+                <span data-i18n="dash.bookings">Bookings</span>
             </a>
             <a href="#turf-slots" class="nav-item" data-section="turf-slots">
                 <i class="fas fa-futbol"></i>
-                <span>Turf Slots</span>
+                <span data-i18n="dash.turf">Turf Slots</span>
             </a>
             <a href="#tickets" class="nav-item" data-section="tickets">
                 <i class="fas fa-ticket-alt"></i>
-                <span>Tickets</span>
+                <span data-i18n="dash.tickets">Tickets</span>
             </a>
             <a href="#revenue" class="nav-item" data-section="revenue">
                 <i class="fas fa-rupee-sign"></i>
-                <span>Revenue</span>
+                <span data-i18n="dash.revenue">Revenue</span>
             </a>
             <a href="#settings" class="nav-item" data-section="settings">
                 <i class="fas fa-cog"></i>
-                <span>Settings</span>
+                <span data-i18n="dash.settings">Settings</span>
             </a>
         </nav>
 
@@ -114,9 +115,9 @@
             <div class="header-right">
                 <div class="header-search">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search events..." id="searchInput">
+                    <input type="text" data-i18n-placeholder="dash.search" placeholder="Search events..." id="searchInput">
                 </div>
-                <button class="header-icon-btn" id="notificationBtn">
+                <button class="header-icon-btn" id="notificationBtn" title="Notifications" data-i18n-title="dash.notifications">
                     <i class="fas fa-bell"></i>
                     <span class="notification-badge">3</span>
                 </button>
@@ -138,7 +139,7 @@
                             <i class="fas fa-ticket-alt"></i>
                         </div>
                         <div class="stat-content">
-                            <p class="stat-label">Total Tickets Sold</p>
+                            <p class="stat-label" data-i18n="dash.stat.tickets">Total Tickets Sold</p>
                             <h3 class="stat-value" id="totalTicketsSold">0</h3>
                             <span class="stat-change positive">
                                 <i class="fas fa-arrow-up"></i> 12% this month
@@ -151,7 +152,7 @@
                             <i class="fas fa-rupee-sign"></i>
                         </div>
                         <div class="stat-content">
-                            <p class="stat-label">Total Revenue</p>
+                            <p class="stat-label" data-i18n="dash.stat.revenue">Total Revenue</p>
                             <h3 class="stat-value" id="totalRevenueDisplay">₹0</h3>
                             <span class="stat-change positive">
                                 <i class="fas fa-arrow-up"></i> ₹24,500 this week
@@ -164,7 +165,7 @@
                             <i class="fas fa-calendar-check"></i>
                         </div>
                         <div class="stat-content">
-                            <p class="stat-label">Active Events</p>
+                            <p class="stat-label" data-i18n="dash.stat.events">Active Events</p>
                             <h3 class="stat-value" id="activeEventsCount">0</h3>
                             <span class="stat-change neutral">
                                 <i class="fas fa-minus"></i> No change
@@ -177,7 +178,7 @@
                             <i class="fas fa-eye"></i>
                         </div>
                         <div class="stat-content">
-                            <p class="stat-label">Total Views</p>
+                            <p class="stat-label" data-i18n="dash.stat.views">Total Views</p>
                             <h3 class="stat-value" id="totalViews">0</h3>
                             <span class="stat-change positive">
                                 <i class="fas fa-arrow-up"></i> 2,340 this week
@@ -266,20 +267,20 @@
             <section class="content-section" id="eventsSection">
                 <div class="section-header-bar">
                     <div>
-                        <h2 class="section-title">My Events</h2>
+                        <h2 class="section-title" data-i18n="dash.events.title">My Events</h2>
                         <p class="section-description">Manage all your events in one place</p>
                     </div>
                     <div class="section-actions">
                         <div class="filter-dropdown">
                             <select id="eventFilter">
-                                <option value="all">All Events</option>
-                                <option value="active">Active</option>
-                                <option value="draft">Draft</option>
-                                <option value="past">Past</option>
+                                <option value="all" data-i18n="dash.events.all">All Events</option>
+                                <option value="active" data-i18n="dash.events.active">Active</option>
+                                <option value="draft" data-i18n="dash.events.draft">Draft</option>
+                                <option value="past" data-i18n="dash.events.past">Past</option>
                             </select>
                         </div>
                         <button class="btn btn-primary" onclick="navigateToSection('create')">
-                            <i class="fas fa-plus"></i> Create Event
+                            <i class="fas fa-plus"></i> <span data-i18n="dash.create">Create Event</span>
                         </button>
                     </div>
                 </div>
@@ -312,22 +313,22 @@
                         <div class="progress-steps">
                             <div class="wizard-step active" data-step="1">
                                 <div class="step-circle">1</div>
-                                <span class="step-text">Basic Info</span>
+                                <span class="step-text" data-i18n="dash.create.step1">Basic Info</span>
                             </div>
                             <div class="step-connector"></div>
                             <div class="wizard-step" data-step="2">
                                 <div class="step-circle">2</div>
-                                <span class="step-text">Details</span>
+                                <span class="step-text" data-i18n="dash.create.step2">Details</span>
                             </div>
                             <div class="step-connector"></div>
                             <div class="wizard-step" data-step="3">
                                 <div class="step-circle">3</div>
-                                <span class="step-text">Tickets</span>
+                                <span class="step-text" data-i18n="dash.create.step3">Tickets</span>
                             </div>
                             <div class="step-connector"></div>
                             <div class="wizard-step" data-step="4">
                                 <div class="step-circle">4</div>
-                                <span class="step-text">Review</span>
+                                <span class="step-text" data-i18n="dash.create.step4">Review</span>
                             </div>
                         </div>
                     </div>
@@ -338,12 +339,12 @@
                         <div class="form-step active" data-step="1">
                             <div class="form-grid">
                                 <div class="form-group full-width">
-                                    <label for="eventTitle">Event Title *</label>
+                                    <label for="eventTitle" data-i18n="dash.form.title">Event Title *</label>
                                     <input type="text" id="eventTitle" required placeholder="e.g., Sunburn Festival 2024">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="eventCategory">Category *</label>
+                                    <label for="eventCategory" data-i18n="dash.form.category">Category *</label>
                                     <select id="eventCategory" required>
                                         <option value="">Select Category</option>
                                         <option value="concerts">Concerts</option>
@@ -356,7 +357,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="eventCity">City *</label>
+                                    <label for="eventCity" data-i18n="dash.form.city">City *</label>
                                     <select id="eventCity" required>
                                         <option value="">Select City</option>
                                         <option value="mumbai">Mumbai</option>
@@ -369,17 +370,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="eventDate">Event Date *</label>
+                                    <label for="eventDate" data-i18n="dash.form.date">Event Date *</label>
                                     <input type="date" id="eventDate" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="eventTime">Start Time *</label>
+                                    <label for="eventTime" data-i18n="dash.form.time">Start Time *</label>
                                     <input type="time" id="eventTime" required>
                                 </div>
 
                                 <div class="form-group full-width">
-                                    <label for="eventImage">Event Image *</label>
+                                    <label for="eventImage" data-i18n="dash.form.image">Event Image *</label>
                                     <div class="image-upload-area" id="imageUploadArea">
                                         <i class="fas fa-cloud-upload-alt"></i>
                                         <p>Drag & drop image here or click to browse</p>
@@ -393,27 +394,27 @@
                         <div class="form-step" data-step="2">
                             <div class="form-grid">
                                 <div class="form-group full-width">
-                                    <label for="eventDescription">Event Description *</label>
+                                    <label for="eventDescription" data-i18n="dash.form.description">Event Description *</label>
                                     <textarea id="eventDescription" rows="5" required placeholder="Describe your event..."></textarea>
                                 </div>
 
                                 <div class="form-group full-width">
-                                    <label for="eventVenue">Venue Name *</label>
+                                    <label for="eventVenue" data-i18n="dash.form.venue">Venue Name *</label>
                                     <input type="text" id="eventVenue" required placeholder="e.g., Phoenix Marketcity">
                                 </div>
 
                                 <div class="form-group full-width">
-                                    <label for="eventAddress">Full Address *</label>
+                                    <label for="eventAddress" data-i18n="dash.form.address">Full Address *</label>
                                     <input type="text" id="eventAddress" required placeholder="Complete venue address">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="eventDuration">Duration (hours)</label>
+                                    <label for="eventDuration" data-i18n="dash.form.duration">Duration (hours)</label>
                                     <input type="number" id="eventDuration" min="1" max="24" placeholder="e.g., 3">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="eventAgeLimit">Age Limit</label>
+                                    <label for="eventAgeLimit" data-i18n="dash.form.age">Age Limit</label>
                                     <select id="eventAgeLimit">
                                         <option value="all">All Ages</option>
                                         <option value="18+">18+</option>
@@ -426,19 +427,19 @@
                         <div class="form-step" data-step="3">
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label for="ticketPrice">Ticket Price (₹) *</label>
+                                    <label for="ticketPrice" data-i18n="dash.form.price">Ticket Price (₹) *</label>
                                     <input type="number" id="ticketPrice" required min="0" placeholder="e.g., 999">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="totalTickets">Total Tickets *</label>
+                                    <label for="totalTickets" data-i18n="dash.form.quantity">Total Tickets *</label>
                                     <input type="number" id="totalTickets" required min="1" placeholder="e.g., 1000">
                                 </div>
 
                                 <div class="form-group full-width">
                                     <label>
                                         <input type="checkbox" id="earlyBird">
-                                        Enable Early Bird Discount
+                                        <span data-i18n="dash.form.early">Enable Early Bird Discount</span>
                                     </label>
                                 </div>
 
@@ -483,7 +484,7 @@
             <section class="content-section" id="bookingsSection">
                 <div class="section-header-bar">
                     <div>
-                        <h2 class="section-title">Bookings & Orders</h2>
+                        <h2 class="section-title" data-i18n="dash.bookings.title">Bookings & Orders</h2>
                         <p class="section-description">Manage all customer bookings and ticket orders</p>
                     </div>
                     <div class="section-actions">
