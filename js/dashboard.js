@@ -140,33 +140,13 @@ function navigateToSection(section) {
 // Make navigateToSection globally accessible
 window.navigateToSection = navigateToSection;
 
-// ====== Theme Toggle ======
+// ====== Dark Mode (Permanent) ======
 function initThemeToggle() {
-    const themeToggle = document.getElementById('themeToggle');
     const html = document.documentElement;
 
-    // Load saved theme
-    const savedTheme = localStorage.getItem('dashboard_theme') || 'light';
-    html.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('dashboard_theme', newTheme);
-        updateThemeIcon(newTheme);
-    });
-}
-
-function updateThemeIcon(theme) {
-    const icon = document.querySelector('#themeToggle i');
-    if (theme === 'dark') {
-        icon.className = 'fas fa-sun';
-    } else {
-        icon.className = 'fas fa-moon';
-    }
+    // Always set dark mode
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('dashboard_theme', 'dark');
 }
 
 // ====== Mobile Menu ======
@@ -469,11 +449,22 @@ function initCreateEventForm() {
     const imageUploadArea = document.getElementById('imageUploadArea');
     const imageInput = document.getElementById('eventImage');
 
+    // Initialize - check first step validation
+    updateFormStep();
+    checkStepValidation();
+
+    // Add live validation to all inputs
+    form.querySelectorAll('input, select, textarea').forEach(input => {
+        input.addEventListener('input', () => checkStepValidation());
+        input.addEventListener('change', () => checkStepValidation());
+    });
+
     // Next button
     nextBtn?.addEventListener('click', () => {
         if (validateStep(currentStep)) {
             currentStep++;
             updateFormStep();
+            checkStepValidation();
         }
     });
 
@@ -481,6 +472,7 @@ function initCreateEventForm() {
     prevBtn?.addEventListener('click', () => {
         currentStep--;
         updateFormStep();
+        checkStepValidation();
     });
 
     // Early bird toggle
@@ -558,23 +550,73 @@ function updateFormStep() {
         step.classList.toggle('active', index + 1 === currentStep);
     });
 
-    // Update progress indicators
-    document.querySelectorAll('.progress-step').forEach((step, index) => {
-        step.classList.toggle('active', index + 1 <= currentStep);
+    // Update progress indicators (wizard-step)
+    document.querySelectorAll('.wizard-step').forEach((step, index) => {
+        const stepNumber = index + 1;
+        step.classList.remove('active', 'completed');
+
+        if (stepNumber < currentStep) {
+            step.classList.add('completed');
+        } else if (stepNumber === currentStep) {
+            step.classList.add('active');
+        }
     });
 
-    // Update buttons
+    // Update buttons - initially hidden, shown by checkStepValidation
     const nextBtn = document.getElementById('nextStepBtn');
     const prevBtn = document.getElementById('prevStepBtn');
     const submitBtn = document.getElementById('submitEventBtn');
 
-    if (prevBtn) prevBtn.style.display = currentStep > 1 ? 'inline-flex' : 'none';
-    if (nextBtn) nextBtn.style.display = currentStep < totalSteps ? 'inline-flex' : 'none';
-    if (submitBtn) submitBtn.style.display = currentStep === totalSteps ? 'inline-flex' : 'none';
+    // Previous button only shown if not on first step
+    if (prevBtn) prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
+
+    // Next and Submit buttons visibility controlled by validation
+    // Initially hide them, checkStepValidation will show if valid
+    if (nextBtn) nextBtn.style.display = 'none';
+    if (submitBtn) submitBtn.style.display = 'none';
 
     // Generate preview on last step
     if (currentStep === totalSteps) {
         generateEventPreview();
+    }
+}
+
+// Check if current step is valid and show/hide next button accordingly
+function checkStepValidation() {
+    const currentStepEl = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+    if (!currentStepEl) return;
+
+    const nextBtn = document.getElementById('nextStepBtn');
+    const submitBtn = document.getElementById('submitEventBtn');
+
+    const requiredInputs = currentStepEl.querySelectorAll('input[required], select[required], textarea[required]');
+    let allValid = true;
+
+    requiredInputs.forEach(input => {
+        // Check if input has a value
+        const isValid = input.value.trim() !== '';
+
+        // Add/remove validation classes
+        if (input.value.trim()) {
+            input.classList.add('valid');
+            input.classList.remove('invalid');
+        } else {
+            input.classList.remove('valid');
+            if (input.value !== '') {
+                input.classList.add('invalid');
+            }
+        }
+
+        if (!isValid) {
+            allValid = false;
+        }
+    });
+
+    // Show appropriate button only if all fields are valid
+    if (currentStep < totalSteps) {
+        if (nextBtn) nextBtn.style.display = allValid ? 'block' : 'none';
+    } else if (currentStep === totalSteps) {
+        if (submitBtn) submitBtn.style.display = allValid ? 'block' : 'none';
     }
 }
 

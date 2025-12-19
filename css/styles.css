@@ -2038,3 +2038,21 @@ a {
     text-shadow: 3px 3px 15px rgba(0, 0, 0, 1),
                  0 0 25px rgba(0, 0, 0, 0.9) !important;
 }
+
+/* ====== Hero Text - White & Clean ====== */
+.hero-title,
+.hero-highlight {
+    color: white !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    background-clip: unset !important;
+}
+
+.hero-subtitle {
+    background: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    margin-top: 1.5rem !important;
+}
