@@ -32,13 +32,13 @@
 
             <div class="nav-center">
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="#trending" class="nav-link">Events</a></li>
-                    <li><a href="#concerts" class="nav-link">Concerts</a></li>
-                    <li><a href="#sports" class="nav-link">Sports</a></li>
-                    <li><a href="#cities" class="nav-link">Cities</a></li>
-                    <li><a href="pages/about.html" class="nav-link">About</a></li>
-                    <li><a href="pages/blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="#trending" class="nav-link" data-i18n="nav.events">Events</a></li>
+                    <li><a href="#concerts" class="nav-link" data-i18n="nav.concerts">Concerts</a></li>
+                    <li><a href="#sports" class="nav-link" data-i18n="nav.sports">Sports</a></li>
+                    <li><a href="#cities" class="nav-link" data-i18n="nav.cities">Cities</a></li>
+                    <li><a href="pages/about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                    <li><a href="pages/blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="pages/contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
                 </ul>
             </div>
 
@@ -62,36 +62,36 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">
-                Your City.<br>
-                Your Vibe.<br>
-                <span class="hero-highlight">Your Night Out.</span>
+                <span data-i18n="hero.city">Your City.</span><br>
+                <span data-i18n="hero.vibe">Your Vibe.</span><br>
+                <span class="hero-highlight" data-i18n="hero.night">Your Night Out.</span>
             </h1>
-            <p class="hero-subtitle">Discover the best events, concerts, sports & experiences across India</p>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">Discover the best events, concerts, sports & experiences across India</p>
 
             <!-- Search Bar -->
             <div class="hero-search">
                 <div class="search-input-wrapper">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" placeholder="Search for events, artists, venues..." class="search-input">
+                    <input type="text" placeholder="Search for events, artists, venues..." class="search-input" data-i18n="hero.search.placeholder">
                 </div>
-                <button class="btn btn-primary search-btn">Search</button>
+                <button class="btn btn-primary search-btn" data-i18n="hero.search.button">Search</button>
             </div>
 
             <!-- Category Chips -->
             <div class="hero-categories">
-                <a href="#" class="category-chip">🎬 Movies</a>
-                <a href="#" class="category-chip">🎵 Concerts</a>
-                <a href="#" class="category-chip">⚽ Sports</a>
-                <a href="#" class="category-chip">🎭 Theatre</a>
-                <a href="#" class="category-chip">🏟️ Turf Booking</a>
-                <a href="#" class="category-chip">🎓 College Fests</a>
-                <a href="#" class="category-chip">🚌 Bus Tickets</a>
-                <a href="#" class="category-chip">🎉 Events</a>
+                <a href="#" class="category-chip"><span class="chip-emoji">🎬</span> <span data-i18n="category.movies">Movies</span></a>
+                <a href="#" class="category-chip"><span class="chip-emoji">🎵</span> <span data-i18n="category.concerts">Concerts</span></a>
+                <a href="#" class="category-chip"><span class="chip-emoji">⚽</span> <span data-i18n="category.sports">Sports</span></a>
+                <a href="#" class="category-chip"><span class="chip-emoji">🎭</span> <span data-i18n="category.theatre">Theatre</span></a>
+                <a href="#" class="category-chip"><span class="chip-emoji">🏟️</span> <span data-i18n="category.turf">Turf Booking</span></a>
+                <a href="#" class="category-chip"><span class="chip-emoji">🎓</span> <span data-i18n="category.college">College Fests</span></a>
+                <a href="#" class="category-chip"><span class="chip-emoji">🚌</span> <span data-i18n="category.bus">Bus Tickets</span></a>
+                <a href="#" class="category-chip"><span class="chip-emoji">🎉</span> <span data-i18n="category.events">Events</span></a>
             </div>
         </div>
 
         <div class="scroll-indicator">
-            <span>Scroll Down</span>
+            <span data-i18n="hero.scroll">Scroll Down</span>
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
@@ -101,10 +101,10 @@
         <div class="container">
             <div class="section-header">
                 <div>
-                    <h2 class="section-title">Trending Events</h2>
-                    <p class="section-subtitle">The hottest events happening right now</p>
+                    <h2 class="section-title" data-i18n="trending.title">Trending Events</h2>
+                    <p class="section-subtitle" data-i18n="trending.subtitle">The hottest events happening right now</p>
                 </div>
-                <a href="shop.html" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+                <a href="shop.html" class="view-all-link"><span data-i18n="trending.viewall">View All</span> <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <div class="events-carousel" id="trendingCarousel">
@@ -122,8 +122,8 @@
                             <span><i class="fas fa-calendar"></i> Dec 28-30</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹2,499 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹2,499 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -142,8 +142,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 15</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹1,999 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹1,999 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -162,8 +162,8 @@
                             <span><i class="fas fa-calendar"></i> Dec 20</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹499 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹499 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -182,8 +182,8 @@
                             <span><i class="fas fa-calendar"></i> Dec 25-27</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹299 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹299 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -202,8 +202,8 @@
                             <span><i class="fas fa-clock"></i> Available 24/7</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹800 <span>/hour</span></div>
-                            <button class="btn btn-small">Book Slot</button>
+                            <div class="event-price">₹800 <span data-i18n="trending.hour">/hour</span></div>
+                            <button class="btn btn-small" data-i18n="trending.bookslot">Book Slot</button>
                         </div>
                     </div>
                 </div>
@@ -222,8 +222,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 5-7</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹1,799 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹1,799 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -242,8 +242,8 @@
                             <span><i class="fas fa-calendar"></i> Dec 22</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹399 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹399 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -262,8 +262,8 @@
                             <span><i class="fas fa-calendar"></i> Dec 18-31</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹899 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹899 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -282,8 +282,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 12-14</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹3,999 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹3,999 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -302,8 +302,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 20-22</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹199 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹199 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -403,8 +403,8 @@
                             <span><i class="fas fa-calendar"></i> Dec 31</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹1,499 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹1,499 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -421,8 +421,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 8</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹1,999 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹1,999 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -439,8 +439,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 19-21</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹4,999 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹4,999 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -457,8 +457,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 26</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹1,799 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹1,799 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -475,8 +475,8 @@
                             <span><i class="fas fa-calendar"></i> Feb 2</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹999 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹999 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -493,8 +493,8 @@
                             <span><i class="fas fa-calendar"></i> Feb 10-11</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹1,299 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹1,299 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -511,8 +511,8 @@
                             <span><i class="fas fa-calendar"></i> Feb 17-18</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹1,599 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹1,599 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -529,8 +529,8 @@
                             <span><i class="fas fa-calendar"></i> Feb 24</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹899 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹899 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -562,8 +562,8 @@
                             <span><i class="fas fa-calendar"></i> Dec 23</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹799 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹799 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -580,8 +580,8 @@
                             <span><i class="fas fa-calendar"></i> Dec 27</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹999 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹999 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -598,8 +598,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 3</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹599 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹599 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -616,8 +616,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 9</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹699 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹699 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -634,8 +634,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 14</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹649 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹649 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -652,8 +652,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 18</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹599 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹599 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -685,8 +685,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 5</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹1,499 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹1,499 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -703,8 +703,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 12</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹699 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹699 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -721,8 +721,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 16-21</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹399 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹399 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -739,8 +739,8 @@
                             <span><i class="fas fa-calendar"></i> Feb 23-25</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹9,999 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹9,999 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -775,8 +775,8 @@
                             <span><i class="fas fa-calendar"></i> Jan 28</span>
                         </div>
                         <div class="event-footer">
-                            <div class="event-price">₹299 <span>onwards</span></div>
-                            <button class="btn btn-small">Book Now</button>
+                            <div class="event-price">₹299 <span data-i18n="trending.onwards">onwards</span></div>
+                            <button class="btn btn-small" data-i18n="trending.booknow">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -1425,9 +1425,9 @@
             <div class="newsletter-content">
                 <div class="newsletter-text">
                     <h2 class="newsletter-title">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Updates!
+                        <i class="fab fa-whatsapp"></i> <span data-i18n="newsletter.title">Get WhatsApp Updates</span>
                     </h2>
-                    <p class="newsletter-subtitle">Subscribe to our WhatsApp newsletter and get exclusive event offers, early-bird tickets, and instant updates directly on your phone!</p>
+                    <p class="newsletter-subtitle" data-i18n="newsletter.subtitle">Subscribe to receive event notifications and exclusive offers</p>
                 </div>
                 <form class="newsletter-form" id="newsletterForm">
                     <div class="phone-input-wrapper">
@@ -1614,7 +1614,7 @@
                     </button>
                 </form>
                 <p class="newsletter-privacy">
-                    <i class="fas fa-lock"></i> Your number is safe. No spam, unsubscribe anytime.
+                    <i class="fas fa-lock"></i> <span data-i18n="newsletter.privacy">We respect your privacy. Your number will only be used for event updates.</span>
                 </p>
             </div>
         </div>
@@ -1626,7 +1626,7 @@
             <div class="footer-grid">
                 <div class="footer-column">
                     <h3 class="footer-logo">Tixbro</h3>
-                    <p class="footer-description">India's Premier Ticket Booking Platform for Events, Movies, Concerts, Sports & More.</p>
+                    <p class="footer-description" data-i18n="footer.tagline">India's Premier Ticket Booking Platform</p>
                     <div class="social-links">
                         <a href="#" class="social-link whatsapp" title="WhatsApp Updates"><i class="fab fa-whatsapp"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
@@ -1638,7 +1638,7 @@
                 </div>
 
                 <div class="footer-column">
-                    <h4 class="footer-title">Categories</h4>
+                    <h4 class="footer-title" data-i18n="footer.categories.title">Categories</h4>
                     <ul class="footer-links">
                         <li><a href="shop.html?category=movies">Movies</a></li>
                         <li><a href="shop.html?category=concerts">Concerts</a></li>
@@ -1650,7 +1650,7 @@
                 </div>
 
                 <div class="footer-column">
-                    <h4 class="footer-title">Company</h4>
+                    <h4 class="footer-title" data-i18n="footer.company.title">Company</h4>
                     <ul class="footer-links">
                         <li><a href="pages/about.html">About Us</a></li>
                         <li><a href="pages/careers.html">Careers</a></li>
@@ -1662,7 +1662,7 @@
                 </div>
 
                 <div class="footer-column">
-                    <h4 class="footer-title">Support</h4>
+                    <h4 class="footer-title" data-i18n="footer.support.title">Support</h4>
                     <ul class="footer-links">
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">FAQs</a></li>
@@ -1675,7 +1675,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 Tixbro. All rights reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2024 Tixbro. All rights reserved.</p>
                 <div class="payment-methods">
                     <i class="fab fa-cc-visa"></i>
                     <i class="fab fa-cc-mastercard"></i>

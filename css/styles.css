@@ -2009,3 +2009,32 @@ a {
         font-size: 0.75rem;
     }
 }
+
+/* ====== Hero Text - Darker for Better Readability ====== */
+.hero-title,
+.hero-subtitle {
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9),
+                 0 0 20px rgba(0, 0, 0, 0.8),
+                 0 0 30px rgba(0, 0, 0, 0.7) !important;
+}
+
+.hero-title {
+    color: rgba(255, 255, 255, 0.98) !important;
+    font-weight: 800 !important;
+}
+
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.95) !important;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.hero-highlight {
+    color: rgba(255, 255, 255, 1) !important;
+    text-shadow: 3px 3px 15px rgba(0, 0, 0, 1),
+                 0 0 25px rgba(0, 0, 0, 0.9) !important;
+}
