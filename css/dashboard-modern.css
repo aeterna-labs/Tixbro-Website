@@ -1883,3 +1883,14 @@ html {
         min-width: 40px;
     }
 }
+
+/* ====== Global Select/Dropdown Fix for Dark Mode ====== */
+select option {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+select optgroup {
+    background-color: #f3f4f6 !important;
+    color: #000000 !important;
+}
