@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/dashboard-modern.css">
+    <link rel="stylesheet" href="css/create-event-wizard.css">
+
+    <!-- i18n Language Support -->
+    <script src="js/i18n.js"></script>
 </head>
 <body class="dashboard-body">
     <!-- Sidebar Overlay (Mobile) -->
@@ -116,9 +120,10 @@
                     <i class="fas fa-bell"></i>
                     <span class="notification-badge">3</span>
                 </button>
-                <button class="header-icon-btn theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+                <div class="language-switcher-dashboard">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="hi">हिं</button>
+                </div>
             </div>
         </header>
 
@@ -301,32 +306,33 @@
 
             <!-- Create Event Section -->
             <section class="content-section" id="createSection">
-                <div class="create-event-container">
-                    <h2 class="section-title">Create New Event</h2>
-                    <p class="section-description">Fill in the details to create your event</p>
-
-                    <form class="create-event-form" id="createEventForm">
-                        <div class="form-progress">
-                            <div class="progress-step active">
-                                <span class="step-number">1</span>
-                                <span class="step-label">Basic Info</span>
+                <div class="create-event-container-clean">
+                    <!-- Progress Indicator -->
+                    <div class="wizard-progress">
+                        <div class="progress-steps">
+                            <div class="wizard-step active" data-step="1">
+                                <div class="step-circle">1</div>
+                                <span class="step-text">Basic Info</span>
                             </div>
-                            <div class="progress-line"></div>
-                            <div class="progress-step">
-                                <span class="step-number">2</span>
-                                <span class="step-label">Details</span>
+                            <div class="step-connector"></div>
+                            <div class="wizard-step" data-step="2">
+                                <div class="step-circle">2</div>
+                                <span class="step-text">Details</span>
                             </div>
-                            <div class="progress-line"></div>
-                            <div class="progress-step">
-                                <span class="step-number">3</span>
-                                <span class="step-label">Tickets</span>
+                            <div class="step-connector"></div>
+                            <div class="wizard-step" data-step="3">
+                                <div class="step-circle">3</div>
+                                <span class="step-text">Tickets</span>
                             </div>
-                            <div class="progress-line"></div>
-                            <div class="progress-step">
-                                <span class="step-number">4</span>
-                                <span class="step-label">Review</span>
+                            <div class="step-connector"></div>
+                            <div class="wizard-step" data-step="4">
+                                <div class="step-circle">4</div>
+                                <span class="step-text">Review</span>
                             </div>
                         </div>
+                    </div>
+
+                    <form class="wizard-form" id="createEventForm">
 
                         <!-- Form Steps -->
                         <div class="form-step active" data-step="1">
@@ -457,15 +463,16 @@
                             </div>
                         </div>
 
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-outline" id="prevStepBtn" style="display: none;">
-                                <i class="fas fa-arrow-left"></i> Previous
+                        <!-- Navigation Buttons -->
+                        <div class="wizard-navigation">
+                            <button type="button" class="wizard-btn-prev" id="prevStepBtn" style="display: none;">
+                                <i class="fas fa-arrow-left"></i>
                             </button>
-                            <button type="button" class="btn btn-primary" id="nextStepBtn">
-                                Next <i class="fas fa-arrow-right"></i>
+                            <button type="button" class="wizard-btn-next" id="nextStepBtn" style="display: none;">
+                                <i class="fas fa-arrow-right"></i>
                             </button>
-                            <button type="submit" class="btn btn-primary" id="submitEventBtn" style="display: none;">
-                                <i class="fas fa-check"></i> Publish Event
+                            <button type="submit" class="wizard-btn-submit" id="submitEventBtn" style="display: none;">
+                                <i class="fas fa-check"></i>
                             </button>
                         </div>
                     </form>
