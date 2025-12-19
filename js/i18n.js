@@ -147,51 +147,21 @@ class LanguageManager {
     }
 
     addLanguageSwitcher() {
-        // Find navbar
-        const navbar = document.querySelector('.navbar-nav');
-        if (!navbar) return;
+        // Find existing language buttons (already in HTML)
+        const langButtons = document.querySelectorAll('.lang-btn');
+        if (langButtons.length === 0) return;
 
-        // Create language switcher HTML
-        const switcherHTML = `
-            <div class="language-switcher" style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem;">
-                <button class="lang-btn ${this.currentLang === 'en' ? 'active' : ''}" data-lang="en"
-                        style="padding: 0.5rem 0.875rem; border: 2px solid #667eea; background: ${this.currentLang === 'en' ? '#667eea' : 'transparent'};
-                        color: ${this.currentLang === 'en' ? 'white' : '#667eea'}; border-radius: 8px; font-weight: 600; cursor: pointer;
-                        transition: all 0.3s ease; font-size: 0.875rem;">
-                    English
-                </button>
-                <button class="lang-btn ${this.currentLang === 'hi' ? 'active' : ''}" data-lang="hi"
-                        style="padding: 0.5rem 0.875rem; border: 2px solid #667eea; background: ${this.currentLang === 'hi' ? '#667eea' : 'transparent'};
-                        color: ${this.currentLang === 'hi' ? 'white' : '#667eea'}; border-radius: 8px; font-weight: 600; cursor: pointer;
-                        transition: all 0.3s ease; font-size: 0.875rem;">
-                    हिंदी
-                </button>
-            </div>
-        `;
-
-        // Insert before sign in buttons
-        navbar.insertAdjacentHTML('beforeend', switcherHTML);
+        // Set initial active state based on current language
+        langButtons.forEach(btn => {
+            const isActive = btn.dataset.lang === this.currentLang;
+            btn.classList.toggle('active', isActive);
+        });
 
         // Add click handlers
-        document.querySelectorAll('.lang-btn').forEach(btn => {
+        langButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const lang = e.target.dataset.lang;
                 this.switchLanguage(lang);
-            });
-
-            // Hover effect
-            btn.addEventListener('mouseenter', (e) => {
-                if (!e.target.classList.contains('active')) {
-                    e.target.style.background = '#667eea';
-                    e.target.style.color = 'white';
-                }
-            });
-
-            btn.addEventListener('mouseleave', (e) => {
-                if (!e.target.classList.contains('active')) {
-                    e.target.style.background = 'transparent';
-                    e.target.style.color = '#667eea';
-                }
             });
         });
     }
@@ -204,8 +174,6 @@ class LanguageManager {
         document.querySelectorAll('.lang-btn').forEach(btn => {
             const isActive = btn.dataset.lang === lang;
             btn.classList.toggle('active', isActive);
-            btn.style.background = isActive ? '#667eea' : 'transparent';
-            btn.style.color = isActive ? 'white' : '#667eea';
         });
 
         // Apply translations

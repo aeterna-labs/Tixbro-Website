@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,9 +43,10 @@
             </div>
 
             <div class="nav-right">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
-                    <i class="fas fa-moon"></i>
-                </button>
+                <div class="language-switcher-nav">
+                    <button class="lang-btn active" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="hi">हिंदी</button>
+                </div>
                 <a href="javascript:void(0)" class="btn btn-primary" id="authButton" data-i18n="nav.signin">Sign In / Sign Up</a>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
                     <span></span>
@@ -58,12 +59,14 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
-        <div class="hero-overlay-strong"></div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title hero-title-vibrant">
-                <span class="hero-highlight-line" data-i18n="hero.title">Your Night Out.</span>
+            <h1 class="hero-title">
+                Your City.<br>
+                Your Vibe.<br>
+                <span class="hero-highlight">Your Night Out.</span>
             </h1>
-            <p class="hero-subtitle hero-subtitle-vibrant" data-i18n="hero.subtitle">Discover the best events, concerts, sports & experiences across India</p>
+            <p class="hero-subtitle">Discover the best events, concerts, sports & experiences across India</p>
 
             <!-- Search Bar -->
             <div class="hero-search">
