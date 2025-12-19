@@ -278,7 +278,7 @@ async function sendConfirmationEmail(data) {
     });
   };
 
-  // Create ticket list HTML
+  // Create ticket list HTML with view links
   const ticketListHTML = ticketIds.map((ticketId, index) => `
     <tr>
       <td style="padding: 10px; border-bottom: 1px solid #eee;">
@@ -286,6 +286,12 @@ async function sendConfirmationEmail(data) {
       </td>
       <td style="padding: 10px; border-bottom: 1px solid #eee; font-family: monospace;">
         ${ticketId}
+      </td>
+      <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: center;">
+        <a href="https://tixbro-website.netlify.app/ticket/view?id=${ticketId}"
+           style="display: inline-block; padding: 8px 16px; background-color: #667eea; color: white; text-decoration: none; border-radius: 6px; font-size: 12px; font-weight: 600;">
+          View Ticket
+        </a>
       </td>
     </tr>
   `).join('');
@@ -381,12 +387,23 @@ async function sendConfirmationEmail(data) {
                   <tr style="background-color: #f8f9fa;">
                     <th style="padding: 12px; text-align: left; color: #666; font-weight: 600;">Ticket</th>
                     <th style="padding: 12px; text-align: left; color: #666; font-weight: 600;">Ticket-ID</th>
+                    <th style="padding: 12px; text-align: center; color: #666; font-weight: 600;">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   ${ticketListHTML}
                 </tbody>
               </table>
+            </td>
+          </tr>
+
+          <!-- View All Tickets Button -->
+          <tr>
+            <td style="padding: 0 30px 30px 30px; text-align: center;">
+              <a href="https://tixbro-website.netlify.app/ticket/view?id=${ticketIds[0]}"
+                 style="display: inline-block; padding: 16px 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 50px; font-size: 16px; font-weight: 700; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);">
+                🎫 View Your Ticket${quantity > 1 ? 's' : ''}
+              </a>
             </td>
           </tr>
 
@@ -461,10 +478,16 @@ Ort: ${eventLocation}
 Venue: ${eventVenue}
 
 Ihre Tickets (${quantity}x):
-${ticketIds.map((id, i) => `Ticket ${i + 1}: ${id}`).join('\n')}
+${ticketIds.map((id, i) => `
+Ticket ${i + 1}: ${id}
+View Ticket: https://tixbro-website.netlify.app/ticket/view?id=${id}
+`).join('\n')}
 
 Gesamtbetrag: ₹${totalAmount}
 Zahlungs-ID: ${paymentId}
+
+🎫 View All Your Tickets:
+https://tixbro-website.netlify.app/ticket/view?id=${ticketIds[0]}
 
 Bitte bewahren Sie diese E-Mail auf. Sie benötigen Ihre Ticket-ID beim Check-In.
 

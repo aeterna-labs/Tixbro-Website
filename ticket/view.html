@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Tixbro Ticket</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/ticket.css">
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Firebase -->
+    <script type="module" src="../js/firebase-config.js"></script>
+</head>
+<body class="ticket-page">
+    <!-- Loading State -->
+    <div class="ticket-loading" id="loadingState">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
+        <p>Loading your ticket...</p>
+    </div>
+
+    <!-- Error State -->
+    <div class="ticket-error" id="errorState" style="display: none;">
+        <div class="error-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h2>Ticket Not Found</h2>
+        <p>This ticket doesn't exist or the link is invalid.</p>
+        <a href="https://tixbro-website.netlify.app" class="btn btn-primary">
+            <i class="fas fa-home"></i> Back to Home
+        </a>
+    </div>
+
+    <!-- Main Ticket Container -->
+    <div class="ticket-container" id="ticketContainer" style="display: none;">
+        <!-- Header -->
+        <div class="ticket-header">
+            <h1 class="ticket-logo">Tixbro</h1>
+            <div class="ticket-status" id="ticketStatus">
+                <i class="fas fa-check-circle"></i> Valid Ticket
+            </div>
+        </div>
+
+        <!-- Ticket Card -->
+        <div class="ticket-card" id="ticketCard">
+            <div class="ticket-content">
+                <!-- Event Info -->
+                <div class="ticket-section">
+                    <h2 class="event-title" id="eventTitle">Event Name</h2>
+                    <div class="event-details">
+                        <div class="detail-row">
+                            <i class="fas fa-calendar"></i>
+                            <span id="eventDate">Date</span>
+                        </div>
+                        <div class="detail-row">
+                            <i class="fas fa-clock"></i>
+                            <span id="eventTime">Time</span>
+                        </div>
+                        <div class="detail-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="eventLocation">Location</span>
+                        </div>
+                        <div class="detail-row">
+                            <i class="fas fa-building"></i>
+                            <span id="eventVenue">Venue</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="ticket-divider"></div>
+
+                <!-- Customer Info -->
+                <div class="ticket-section">
+                    <h3 class="section-title">Ticket Holder</h3>
+                    <div class="customer-details">
+                        <div class="detail-row">
+                            <i class="fas fa-user"></i>
+                            <span id="customerName">Name</span>
+                        </div>
+                        <div class="detail-row">
+                            <i class="fas fa-envelope"></i>
+                            <span id="customerEmail">Email</span>
+                        </div>
+                        <div class="detail-row">
+                            <i class="fas fa-phone"></i>
+                            <span id="customerPhone">Phone</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="ticket-divider"></div>
+
+                <!-- Ticket Info -->
+                <div class="ticket-section">
+                    <h3 class="section-title">Ticket Information</h3>
+                    <div class="ticket-info">
+                        <div class="info-item">
+                            <span class="info-label">Ticket ID</span>
+                            <span class="info-value" id="ticketId">TKT-XXX</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Price</span>
+                            <span class="info-value" id="ticketPrice">₹0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Purchase Date</span>
+                            <span class="info-value" id="purchaseDate">Date</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Payment ID</span>
+                            <span class="info-value payment-id" id="paymentId">pi_xxx</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QR Code Section -->
+                <div class="ticket-section qr-section">
+                    <h3 class="section-title">Scan to Verify</h3>
+                    <div class="qr-container">
+                        <div id="qrcode"></div>
+                    </div>
+                    <p class="qr-note">Show this QR code at the event entrance</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="ticket-actions">
+            <button class="btn btn-primary btn-download" id="downloadPdfBtn">
+                <i class="fas fa-download"></i> Download PDF Ticket
+            </button>
+            <button class="btn btn-outline" onclick="window.print()">
+                <i class="fas fa-print"></i> Print Ticket
+            </button>
+        </div>
+
+        <!-- Important Notice -->
+        <div class="ticket-notice">
+            <i class="fas fa-info-circle"></i>
+            <p><strong>Important:</strong> This ticket is valid for one-time entry only. Once scanned, it cannot be used again.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="ticket-footer">
+            <p>Need help? Contact us at <a href="mailto:support@tixbro.com">support@tixbro.com</a></p>
+            <p class="copyright">&copy; 2024 Tixbro. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script type="module" src="../js/ticket-viewer.js"></script>
+</body>
+</html>
