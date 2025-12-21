@@ -214,6 +214,61 @@ const translations = {
         'contact.address': 'Address',
         'contact.phone': 'Phone',
         'contact.hours': 'Business Hours',
+
+        // Homepage Additional Sections
+        'home.services.intro': 'Choose from our wide range of entertainment options',
+        'home.explore': 'Explore',
+
+        // Why Choose Section
+        'why.title': 'Why Choose Tixbro?',
+        'why.subtitle': "India's most trusted ticket booking platform",
+        'why.instant.title': 'Instant Booking',
+        'why.instant.desc': 'Book tickets in seconds with our lightning-fast platform',
+        'why.secure.title': '100% Secure',
+        'why.secure.desc': 'Bank-grade encryption for all transactions',
+        'why.price.title': 'Best Prices',
+        'why.price.desc': 'Lowest prices guaranteed with exclusive deals',
+        'why.support.title': '24/7 Support',
+        'why.support.desc': 'Round-the-clock customer support for assistance',
+        'why.mobile.title': 'Mobile Tickets',
+        'why.mobile.desc': 'Digital tickets on your phone, no printing needed',
+        'why.refund.title': 'Easy Refunds',
+        'why.refund.desc': 'Hassle-free cancellation and instant refunds',
+        'why.alerts.title': 'Event Alerts',
+        'why.alerts.desc': 'Never miss your favorite artists and events',
+        'why.reviews.title': 'Verified Reviews',
+        'why.reviews.desc': 'Authentic reviews from real attendees',
+
+        // Artists Section
+        'artists.title': 'Popular Artists',
+        'artists.subtitle': 'Follow your favorite artists and never miss their events',
+
+        // Categories Section
+        'categories.title': 'Trending Categories',
+        'categories.subtitle': "What's hot right now",
+
+        // How It Works
+        'how.title': 'How It Works',
+        'how.subtitle': 'Book tickets in 3 easy steps',
+        'how.step1.title': 'Browse Events',
+        'how.step1.desc': 'Explore thousands of events across categories and cities',
+        'how.step2.title': 'Select & Book',
+        'how.step2.desc': 'Choose your preferred date, time and seats',
+        'how.step3.title': 'Enjoy Event',
+        'how.step3.desc': 'Get instant tickets on your mobile and enjoy!',
+
+        // Testimonials
+        'testimonials.title': 'What Our Customers Say',
+        'testimonials.subtitle': 'Join millions of happy customers',
+
+        // Blog
+        'blog.title': 'From Our Blog',
+        'blog.subtitle': 'Latest news and insights from the entertainment world',
+        'blog.readmore': 'min read',
+
+        // FAQ
+        'faq.title': 'Frequently Asked Questions',
+        'faq.subtitle': 'Got questions? We\'ve got answers',
     },
 
     hi: {
@@ -428,6 +483,61 @@ const translations = {
         'contact.address': 'पता',
         'contact.phone': 'फ़ोन',
         'contact.hours': 'कार्य समय',
+
+        // Homepage Additional Sections
+        'home.services.intro': 'मनोरंजन विकल्पों की हमारी विस्तृत श्रृंखला से चुनें',
+        'home.explore': 'एक्सप्लोर करें',
+
+        // Why Choose Section
+        'why.title': 'Tixbro क्यों चुनें?',
+        'why.subtitle': 'भारत का सबसे विश्वसनीय टिकट बुकिंग प्लेटफॉर्म',
+        'why.instant.title': 'तत्काल बुकिंग',
+        'why.instant.desc': 'हमारे बिजली-तेज़ प्लेटफॉर्म के साथ सेकंड में टिकट बुक करें',
+        'why.secure.title': '100% सुरक्षित',
+        'why.secure.desc': 'सभी लेनदेन के लिए बैंक-ग्रेड एन्क्रिप्शन',
+        'why.price.title': 'सर्वोत्तम कीमतें',
+        'why.price.desc': 'विशेष सौदों के साथ न्यूनतम कीमतों की गारंटी',
+        'why.support.title': '24/7 सहायता',
+        'why.support.desc': 'सहायता के लिए चौबीसों घंटे ग्राहक सहायता',
+        'why.mobile.title': 'मोबाइल टिकट',
+        'why.mobile.desc': 'आपके फोन पर डिजिटल टिकट, कोई प्रिंटिंग की जरूरत नहीं',
+        'why.refund.title': 'आसान रिफंड',
+        'why.refund.desc': 'परेशानी मुक्त रद्दीकरण और तत्काल रिफंड',
+        'why.alerts.title': 'इवेंट अलर्ट',
+        'why.alerts.desc': 'अपने पसंदीदा कलाकारों और इवेंट्स को कभी न चूकें',
+        'why.reviews.title': 'सत्यापित समीक्षाएं',
+        'why.reviews.desc': 'वास्तविक उपस्थित लोगों की प्रामाणिक समीक्षाएं',
+
+        // Artists Section
+        'artists.title': 'लोकप्रिय कलाकार',
+        'artists.subtitle': 'अपने पसंदीदा कलाकारों को फॉलो करें और उनके इवेंट्स न चूकें',
+
+        // Categories Section
+        'categories.title': 'ट्रेंडिंग श्रेणियाँ',
+        'categories.subtitle': 'अभी क्या हॉट है',
+
+        // How It Works
+        'how.title': 'यह कैसे काम करता है',
+        'how.subtitle': '3 आसान चरणों में टिकट बुक करें',
+        'how.step1.title': 'इवेंट्स ब्राउज़ करें',
+        'how.step1.desc': 'श्रेणियों और शहरों में हजारों इवेंट्स एक्सप्लोर करें',
+        'how.step2.title': 'चयन करें और बुक करें',
+        'how.step2.desc': 'अपनी पसंदीदा तारीख, समय और सीटें चुनें',
+        'how.step3.title': 'इवेंट का आनंद लें',
+        'how.step3.desc': 'अपने मोबाइल पर तत्काल टिकट प्राप्त करें और आनंद लें!',
+
+        // Testimonials
+        'testimonials.title': 'हमारे ग्राहक क्या कहते हैं',
+        'testimonials.subtitle': 'लाखों खुश ग्राहकों में शामिल हों',
+
+        // Blog
+        'blog.title': 'हमारे ब्लॉग से',
+        'blog.subtitle': 'मनोरंजन जगत से नवीनतम समाचार और जानकारी',
+        'blog.readmore': 'मिनट पढ़ें',
+
+        // FAQ
+        'faq.title': 'अक्सर पूछे जाने वाले प्रश्न',
+        'faq.subtitle': 'प्रश्न हैं? हमारे पास उत्तर हैं',
     }
 };
 
