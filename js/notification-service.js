@@ -80,7 +80,7 @@ class NotificationService {
         try {
             // Get FCM token
             const currentToken = await getToken(this.messaging, {
-                vapidKey: 'YOUR_VAPID_KEY_HERE' // You'll need to add this from Firebase Console
+                vapidKey: 'BCrZNmaxc9YXbCayeocLUp3HGDeP1Cr1sbzUVoQ7pH00HyreD-jkx0HLLydmXpXr1xRXwXoSPi7ZeBSfflPijRM'
             });
 
             if (currentToken) {
