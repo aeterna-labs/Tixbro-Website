@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact Tixbro - Get in Touch with Us">
+    <meta name="description" content="Contact Tixbro - Get in Touch with India's Premier Ticket Booking Platform">
     <title>Contact Us - Tixbro</title>
 
     <!-- Fonts -->
@@ -16,6 +16,312 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- i18n Language Support -->
+    <script src="../js/i18n.js"></script>
+
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .contact-info-desc {
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 35px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 107, 53, 0.08);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .contact-item-content h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .contact-item-content p {
+            color: #d0d0d0;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .contact-item-content small {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .contact-form-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 20px;
+            padding: 45px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .contact-form-desc {
+            color: #b0b0b0;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #666;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.1);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+        }
+
+        .success-message {
+            display: none;
+            padding: 20px;
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            color: #4caf50;
+            margin-top: 20px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .faq-section {
+            margin-top: 80px;
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .faq-header p {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255, 107, 53, 0.5);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 25px 30px;
+            background: transparent;
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #ff6b35;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 30px 25px 30px;
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: #ff6b35;
+            border-color: #ff6b35;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .contact-info-card,
+            .contact-form-card {
+                padding: 30px;
+            }
+
+            .faq-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -29,20 +335,22 @@
 
             <div class="nav-center">
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="../index.html" class="nav-link">Home</a></li>
-                    <li><a href="../shop.html" class="nav-link">Events</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="../index.html#trending" class="nav-link" data-i18n="nav.events">Events</a></li>
+                    <li><a href="../index.html#concerts" class="nav-link" data-i18n="nav.concerts">Concerts</a></li>
+                    <li><a href="../index.html#sports" class="nav-link" data-i18n="nav.sports">Sports</a></li>
+                    <li><a href="../index.html#cities" class="nav-link" data-i18n="nav.cities">Cities</a></li>
+                    <li><a href="about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                    <li><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
                 </ul>
             </div>
 
             <div class="nav-right">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <a href="../login.html" class="btn btn-outline">Sign In</a>
-                <a href="../login.html" class="btn btn-primary">Sign Up</a>
+                <div class="language-switcher-nav">
+                    <button class="lang-btn active" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="hi">हिंदी</button>
+                </div>
+                <a href="javascript:void(0)" class="btn btn-primary" id="authButton" data-i18n="nav.signin">Sign In / Sign Up</a>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
                     <span></span>
                     <span></span>
@@ -56,171 +364,214 @@
     <section class="hero" style="min-height: 50vh;">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Get in Touch</h1>
-            <p class="hero-subtitle">We'd love to hear from you</p>
+            <h1 class="hero-title" data-i18n="contact.hero.title">Get in Touch</h1>
+            <p class="hero-subtitle" data-i18n="contact.hero.subtitle">We're here to help you with all your ticket booking needs</p>
         </div>
     </section>
 
-    <!-- Contact Info & Form Section -->
+    <!-- Contact Section -->
     <section class="section">
         <div class="container">
-            <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-3xl); align-items: start;">
+            <div class="contact-grid">
                 <!-- Contact Information -->
-                <div>
-                    <h2 style="font-size: 2rem; margin-bottom: var(--space-lg); color: var(--text-primary);">Contact Information</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: var(--space-2xl); line-height: 1.7;">
-                        Have questions or need support? Our team is here to help you. Reach out through any of the channels below.
-                    </p>
+                <div class="contact-info-card">
+                    <h2 class="contact-info-title" data-i18n="contact.info.title">Contact Information</h2>
+                    <p class="contact-info-desc" data-i18n="contact.info.desc">Have questions or need support? Our team is here to help you. Reach out through any of the channels below.</p>
 
-                    <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
-                        <div style="display: flex; gap: var(--space-lg); align-items: start;">
-                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; flex-shrink: 0;">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-primary);">Email Us</h4>
-                                <p style="color: var(--text-secondary);">support@tixbro.com</p>
-                                <p style="color: var(--text-secondary);">partnerships@tixbro.com</p>
-                            </div>
+                    <!-- Email -->
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
                         </div>
-
-                        <div style="display: flex; gap: var(--space-lg); align-items: start;">
-                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--gold), #FFD700); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; flex-shrink: 0;">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-primary);">Call Us</h4>
-                                <p style="color: var(--text-secondary);">+91 1800 123 4567</p>
-                                <p style="color: var(--text-tertiary); font-size: 0.875rem;">Mon-Sun, 9 AM - 9 PM IST</p>
-                            </div>
+                        <div class="contact-item-content">
+                            <h4 data-i18n="contact.email.title">Email Us</h4>
+                            <p data-i18n="contact.email.support">support@tixbro.com</p>
+                            <p data-i18n="contact.email.business">business@tixbro.com</p>
                         </div>
+                    </div>
 
-                        <div style="display: flex; gap: var(--space-lg); align-items: start;">
-                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--teal), #00C9A7); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; flex-shrink: 0;">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-primary);">Visit Us</h4>
-                                <p style="color: var(--text-secondary); line-height: 1.6;">
-                                    Tixbro Technologies Pvt. Ltd.<br>
-                                    123, MG Road, Sector 5<br>
-                                    Mumbai, Maharashtra 400001<br>
-                                    India
-                                </p>
-                            </div>
+                    <!-- Phone -->
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
                         </div>
+                        <div class="contact-item-content">
+                            <h4 data-i18n="contact.phone.title">Call Us</h4>
+                            <p>+91 9503051239</p>
+                            <p>+91 8767209273</p>
+                            <small data-i18n="contact.phone.hours">Mon-Sun, 9 AM - 9 PM IST</small>
+                        </div>
+                    </div>
 
-                        <div style="display: flex; gap: var(--space-lg); align-items: start;">
-                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--maroon), #A01F49); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; flex-shrink: 0;">
-                                <i class="fas fa-share-alt"></i>
-                            </div>
-                            <div>
-                                <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-primary);">Social Media</h4>
-                                <div class="social-links" style="margin-top: var(--space-md);">
-                                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
+                    <!-- Address -->
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-item-content">
+                            <h4 data-i18n="contact.address.title">Visit Us</h4>
+                            <p data-i18n="contact.address.line1">Tixbro Technologies Pvt. Ltd.</p>
+                            <p data-i18n="contact.address.line2">Mumbai, Maharashtra</p>
+                            <p data-i18n="contact.address.line3">India</p>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="contact-item-content">
+                            <h4 data-i18n="contact.social.title">Follow Us</h4>
+                            <p data-i18n="contact.social.desc">Stay connected on social media</p>
+                            <div class="social-links">
+                                <a href="#" class="social-link" aria-label="Facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Contact Form -->
-                <div style="background: var(--bg-primary); padding: var(--space-2xl); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
-                    <h2 style="font-size: 1.75rem; margin-bottom: var(--space-md); color: var(--text-primary);">Send Us a Message</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: var(--space-2xl);">
-                        Fill out the form below and we'll get back to you as soon as possible.
-                    </p>
+                <div class="contact-form-card">
+                    <h2 class="contact-form-title" data-i18n="contact.form.title">Send Us a Message</h2>
+                    <p class="contact-form-desc" data-i18n="contact.form.desc">Fill out the form below and we'll get back to you within 24 hours.</p>
 
-                    <form id="contactForm" style="display: flex; flex-direction: column; gap: var(--space-lg);">
-                        <div>
-                            <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary);">Name *</label>
-                            <input type="text" id="name" name="name" required style="width: 100%; padding: 0.875rem 1rem; border: 2px solid var(--border-color); border-radius: var(--radius-md); font-size: 1rem; background: var(--bg-primary); color: var(--text-primary); transition: border-color var(--transition-base);">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" data-i18n="contact.form.name">Your Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                data-i18n-placeholder="contact.form.name.placeholder"
+                                placeholder="Enter your full name"
+                                required
+                            >
                         </div>
 
-                        <div>
-                            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary);">Email *</label>
-                            <input type="email" id="email" name="email" required style="width: 100%; padding: 0.875rem 1rem; border: 2px solid var(--border-color); border-radius: var(--radius-md); font-size: 1rem; background: var(--bg-primary); color: var(--text-primary); transition: border-color var(--transition-base);">
+                        <div class="form-group">
+                            <label for="email" data-i18n="contact.form.email">Email Address</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                data-i18n-placeholder="contact.form.email.placeholder"
+                                placeholder="Enter your email"
+                                required
+                            >
                         </div>
 
-                        <div>
-                            <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary);">Subject *</label>
-                            <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.875rem 1rem; border: 2px solid var(--border-color); border-radius: var(--radius-md); font-size: 1rem; background: var(--bg-primary); color: var(--text-primary); transition: border-color var(--transition-base);">
+                        <div class="form-group">
+                            <label for="phone" data-i18n="contact.form.phone">Phone Number</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                data-i18n-placeholder="contact.form.phone.placeholder"
+                                placeholder="Enter your phone number"
+                            >
                         </div>
 
-                        <div>
-                            <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary);">Message *</label>
-                            <textarea id="message" name="message" rows="6" required style="width: 100%; padding: 0.875rem 1rem; border: 2px solid var(--border-color); border-radius: var(--radius-md); font-size: 1rem; background: var(--bg-primary); color: var(--text-primary); transition: border-color var(--transition-base); resize: vertical; font-family: var(--font-body);"></textarea>
+                        <div class="form-group">
+                            <label for="subject" data-i18n="contact.form.subject">Subject</label>
+                            <input
+                                type="text"
+                                id="subject"
+                                name="subject"
+                                data-i18n-placeholder="contact.form.subject.placeholder"
+                                placeholder="What is this regarding?"
+                                required
+                            >
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.125rem; padding: 1rem;">
-                            Send Message
+                        <div class="form-group">
+                            <label for="message" data-i18n="contact.form.message">Message</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                data-i18n-placeholder="contact.form.message.placeholder"
+                                placeholder="Tell us how we can help you..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-i18n="contact.form.submit">Send Message</span>
                         </button>
+
+                        <div class="success-message" id="successMessage">
+                            <i class="fas fa-check-circle"></i> <span data-i18n="contact.form.success">Thank you! Your message has been sent successfully.</span>
+                        </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Map Section (Placeholder) -->
-    <section class="section" style="background: var(--bg-secondary); padding: 0;">
-        <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #667EEA, #764BA2); display: flex; align-items: center; justify-content: center; color: white;">
-            <div style="text-align: center;">
-                <div style="font-size: 4rem; margin-bottom: var(--space-md);">📍</div>
-                <h3 style="font-size: 1.5rem; color: white;">Mumbai, Maharashtra, India</h3>
-                <p style="opacity: 0.9;">Visit us at our headquarters</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header centered">
-                <h2 class="section-title">Frequently Asked Questions</h2>
-                <p class="section-subtitle">Quick answers to common questions</p>
-            </div>
-
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What are your customer support hours?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Our customer support team is available 24/7 to assist you. You can reach us via phone, email, or live chat on our website.</p>
-                    </div>
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <div class="faq-header">
+                    <h2 data-i18n="contact.faq.title">Frequently Asked Questions</h2>
+                    <p data-i18n="contact.faq.subtitle">Quick answers to common questions</p>
                 </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How quickly can I expect a response?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We typically respond to all inquiries within 24 hours on business days. For urgent issues, please call our support hotline for immediate assistance.</p>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="contact.faq.q1">What are your customer support hours?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content" data-i18n="contact.faq.a1">
+                                Our customer support team is available 7 days a week, from 9 AM to 9 PM IST. For urgent queries, you can call our helpline numbers.
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Can I visit your office in person?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes! Our office is open Monday through Friday, 9 AM to 6 PM IST. We recommend calling ahead to schedule a visit.</p>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="contact.faq.q2">How quickly can I expect a response?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content" data-i18n="contact.faq.a2">
+                                We typically respond to all email inquiries within 2-4 hours during business hours. Phone support provides immediate assistance.
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How do I report a technical issue?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>For technical issues, please email support@tixbro.com with detailed information about the problem, including screenshots if possible. Our technical team will investigate and resolve the issue promptly.</p>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="contact.faq.q3">Can I get a refund for my tickets?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content" data-i18n="contact.faq.a3">
+                                Refund policies vary by event type. Please check our Refund Policy page or contact support for specific refund requests.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-i18n="contact.faq.q4">How do I report a technical issue?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content" data-i18n="contact.faq.a4">
+                                For technical issues, please email support@tixbro.com with screenshots and detailed information. Our technical team will resolve it promptly.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,8 +584,8 @@
             <div class="footer-grid">
                 <div class="footer-column">
                     <h3 class="footer-logo">Tixbro</h3>
-                    <p class="footer-description">India's Premier Ticket Booking Platform for Events, Movies, Concerts, Sports & More.</p>
-                    <div class="social-links">
+                    <p class="footer-description" data-i18n="footer.tagline">India's Premier Ticket Booking Platform for Events, Movies, Concerts, Sports & More.</p>
+                    <div class="social-links" style="margin-top: 20px;">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -244,50 +595,40 @@
                 </div>
 
                 <div class="footer-column">
-                    <h4 class="footer-title">Categories</h4>
+                    <h4 class="footer-title" data-i18n="footer.categories">Categories</h4>
                     <ul class="footer-links">
-                        <li><a href="../shop.html?category=movies">Movies</a></li>
-                        <li><a href="../shop.html?category=concerts">Concerts</a></li>
-                        <li><a href="../shop.html?category=sports">Sports</a></li>
-                        <li><a href="../shop.html?category=theatre">Theatre</a></li>
-                        <li><a href="../shop.html?category=turf">Turf Booking</a></li>
-                        <li><a href="../shop.html?category=college-fest">College Fests</a></li>
+                        <li><a href="#" data-i18n="category.movies">Movies</a></li>
+                        <li><a href="#" data-i18n="category.concerts">Concerts</a></li>
+                        <li><a href="#" data-i18n="category.sports">Sports</a></li>
+                        <li><a href="#" data-i18n="category.theatre">Theatre</a></li>
+                        <li><a href="#" data-i18n="category.turf">Turf Booking</a></li>
+                        <li><a href="#" data-i18n="category.college">College Fests</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
-                    <h4 class="footer-title">Company</h4>
+                    <h4 class="footer-title" data-i18n="footer.company">Company</h4>
                     <ul class="footer-links">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">Partnership</a></li>
+                        <li><a href="about.html" data-i18n="footer.about">About Us</a></li>
+                        <li><a href="careers.html" data-i18n="footer.careers">Careers</a></li>
+                        <li><a href="blog.html" data-i18n="footer.blog">Blog</a></li>
+                        <li><a href="contact.html" data-i18n="footer.contact">Contact Us</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
-                    <h4 class="footer-title">Support</h4>
+                    <h4 class="footer-title" data-i18n="footer.support">Support</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Refund Policy</a></li>
-                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="faq.html" data-i18n="footer.faq">FAQs</a></li>
+                        <li><a href="terms.html" data-i18n="footer.terms">Terms & Conditions</a></li>
+                        <li><a href="refund.html" data-i18n="footer.refund">Refund Policy</a></li>
+                        <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 Tixbro. All rights reserved.</p>
-                <div class="payment-methods">
-                    <i class="fab fa-cc-visa"></i>
-                    <i class="fab fa-cc-mastercard"></i>
-                    <i class="fab fa-cc-amex"></i>
-                    <i class="fab fa-cc-paypal"></i>
-                </div>
+                <p>&copy; 2026 Tixbro. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -300,17 +641,55 @@
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
 
-    <style>
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const isActive = button.classList.contains('active');
 
-        @media (max-width: 968px) {
-            section > div > div[style*="grid-template-columns: 1fr 1.5fr"] {
-                grid-template-columns: 1fr !important;
-            }
-        }
-    </style>
+                // Close all other items
+                document.querySelectorAll('.faq-question').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.nextElementSibling.classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    button.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            // Here you can add your form submission logic (Firebase, API, etc.)
+            console.log('Contact Form Submitted:', formData);
+
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+
+            // Reset form
+            this.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
