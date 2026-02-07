@@ -372,12 +372,15 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to Top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- JavaScript -->
-    <script src="../js/main.js"></script>
+    <script>
+        // Minimal mobile menu toggle - no animations
+        const toggle = document.getElementById('mobileMenuToggle');
+        const menu = document.querySelector('.nav-center');
+        if (toggle && menu) {
+            toggle.addEventListener('click', () => {
+                menu.classList.toggle('active');
+            });
+        }
+    </script>
 </body>
 </html>
